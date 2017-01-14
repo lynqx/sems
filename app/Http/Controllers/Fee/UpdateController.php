@@ -25,7 +25,7 @@ class UpdateController extends LayoutsMainController
 
         $validator = Validator::make($input,
             array(
-                'name' => 'required|min:3|unique:fees,name'
+                'name' => 'required|min:3|unique:fee_types,name'
             )
         );
         if ($validator->fails()) {

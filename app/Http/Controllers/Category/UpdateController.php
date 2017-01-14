@@ -26,7 +26,7 @@ class UpdateController extends LayoutsMainController
         $category = Category::findOrFail(Input::get('cat_id'));
         $input = Input::all();
         $category->category = Input::get('category');
-        $category->user_id = Input::get('teacher');
+        $category->teacher = Input::get('teacher');
 
         $validator = Validator::make($input,
             array(

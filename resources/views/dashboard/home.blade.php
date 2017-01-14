@@ -24,6 +24,67 @@
                     @if(Auth::user()->hasRole('Teacher'))
                         <p>Yellow pawpaw</p>
                     @endif
+
+                    <div class="col-sm-3">
+
+                        <div class="tile-progress tile-red">
+                            <div class="tile-header">
+                                <h3>Students</h3>
+                                <span>Total Number of students registered this term.</span>
+                            </div>
+
+                            <div class="tile-progressbar">
+                                <span data-fill="{{$studentscount}}"></span>
+                            </div>
+
+                            <div class="tile-footer">
+                                <h4>
+                                    <span class="pct-counter">0</span> students
+                                </h4>
+                                <span>so far this term</span>
+                            </div>
+                        </div>
+
+                        <div class="tile-progress tile-green">
+                            <div class="tile-header">
+                                <h3>New Students</h3>
+                                <span>Number of students who joined the school this term.</span>
+                            </div>
+
+                            <div class="tile-progressbar">
+                                <span data-fill="21"></span>
+                            </div>
+
+                            <div class="tile-footer">
+                                <h4>
+                                    <span class="pct-counter">0</span> students
+                                </h4>
+
+                                <span>Newly registered student this term alone</span>
+                            </div>
+                        </div>
+
+                        <div class="tile-progress tile-aqua">
+                            <div class="tile-header">
+                                <h3>Outstanding Fees</h3>
+                                <span>Total number of students who have not paid their school fees this term.</span>
+                            </div>
+
+                            <div class="tile-progressbar">
+                                <span data-fill="89"></span>
+                            </div>
+
+                            <div class="tile-footer">
+                                <h4>
+                                    <span class="pct-counter">0</span> students
+                                </h4>
+
+                                <span>students have not paid this term</span>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
 

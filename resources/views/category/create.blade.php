@@ -51,7 +51,8 @@
 
                             <div class="col-md-9">
                                 <div class="input-group">
-                                    <select name="teacher" class="select2" data-allow-clear="true" data-placeholder="Select one Teacher..." required>
+                                    <select name="teacher" class="select2" data-allow-clear="true" data-placeholder="Select one teacher...">
+
                                         <option></option>
                                         @foreach($users as $user)
                                         <option value="{{$user->id}}">{{$user->firstname}}  {{$user->lastname}}</option>

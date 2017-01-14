@@ -8,7 +8,7 @@
     <meta name="description" content="School Management Portal"/>
     <meta name="author" content=""/>
 
-    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="icon" href="{{URL::asset('assets/images/favicon.ico')}}">
 
     <title>
         <?php
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/neon-core.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/neon-theme.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('assets/css/neon-forms.')}}">
+    <link rel="stylesheet" href="{{URL::asset('assets/css/neon-forms.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/custom.css')}}">
 
     <script src="{{URL::asset('assets/js/jquery-1.11.3.min.js')}}"></script>
@@ -79,8 +79,8 @@
 
                 <!-- logo -->
                 <div class="logo">
-                    <a href="index.html">
-                        <img src="{{URL::asset('assets/images/logo2.png')}}" width="120" alt=""/>
+                    <a href="#">
+                        <img src="{{URL::asset('assets/images/lylogo2.png')}}" width="120" alt=""/>
                     </a>
                 </div>
 
@@ -106,12 +106,12 @@
 
                 <div class="sui-normal">
                     <a href="#" class="user-link">
-                        <img src="assets/images/thumb-1.png" width="55" alt="" class="img-circle"/>
+                        <img src="{{URL::asset('assets/images/thumb-1.png')}}" width="55" alt="" class="img-circle"/>
                         <span>Welcome,</span>
                         <strong>{{Auth::user()->firstname}} {{Auth::user()->lastname}} </strong>
                         @foreach($roles as $role)
-                        <p class="label label-info">{{$role->role}}</p>
-                            @endforeach
+                            <p class="label label-info">{{$role->role}}</p>
+                        @endforeach
                     </a>
                 </div>
 
@@ -145,24 +145,26 @@
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-layout"></i>
-                        <span class="title">Class</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{action('Category\CreateController@home')}}">
-                                <span class="title">Create a New Class</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Category\IndexController@home')}}">
-                                <span class="title">View all Classes</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @if(Auth::user()->hasRole('Admin'))
+                    <li class="has-sub">
+                        <a href="#">
+                            <i class="entypo-layout"></i>
+                            <span class="title">Class</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{action('Category\CreateController@home')}}">
+                                    <span class="title">Create a New Class</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Category\IndexController@home')}}">
+                                    <span class="title">View all Classes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
 
                 <li class="has-sub">
                     <a href="ui-panels.html">
@@ -170,23 +172,24 @@
                         <span class="title">Fees</span>
                     </a>
                     <ul>
-                        @if(Auth::user()->hasRole('Teacher'))
+                        @if(Auth::user()->hasRole('Admin'))
                             <li>
                                 <a href="{{action('Fee\CreateController@home')}}">
-                                    <span class="title">Add New Fee Category</span>
+                                    <span class="title">Add New Fee Type</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{action('Fee\IndexController@home')}}">
+                                    <span class="title">View all Fee Types</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Fee\CreateController@feelist')}}">
+                                    <span class="title">Create Fee Items</span>
                                 </a>
                             </li>
                         @endif
-                        <li>
-                            <a href="{{action('Fee\IndexController@home')}}">
-                                <span class="title">View all Fee Category</span>
-                            </a>
-                        </li>
-                            <li>
-                                <a href="{{action('Fee\CreateController@home')}}">
-                                    <span class="title">Add a New Fee</span>
-                                </a>
-                            </li>
                     </ul>
                 </li>
                 <li class="has-sub">
@@ -205,6 +208,12 @@
                         <li>
                             <a href="{{action('Students\IndexController@home')}}">
                                 <i class="entypo-pencil"></i>
+                                <span class="title">View Students by Class</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{action('Students\IndexController@home')}}">
+                                <i class="entypo-pencil"></i>
                                 <span class="title">View all Students</span>
                             </a>
                         </li>
@@ -217,13 +226,13 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{action('Parents\IndexController@home')}}">
+                            <a href="{{action('Parents\CreateController@home')}}">
                                 <i class="entypo-inbox"></i>
-                                <span class="title">Manage Parents</span>
+                                <span class="title">Add Parents</span>
                             </a>
                         </li>
                         <li>
-                            <a href="mailbox-compose.html">
+                            <a href="{{action('Parents\IndexController@home')}}">
                                 <i class="entypo-pencil"></i>
                                 <span class="title">View all Parents</span>
                             </a>
@@ -239,7 +248,7 @@
                         <li>
                             <a href="mailbox.html">
                                 <i class="entypo-inbox"></i>
-                                <span class="title">Manage Teachers</span>
+                                <span class="title">Register Teachers</span>
                             </a>
                         </li>
                         <li>
@@ -409,32 +418,32 @@
 
                 <ul class="user-info pull-left pull-none-xsm">
 
-<li>
-                    <ul class="user-info pull-left pull-right-xs pull-none-xsm">
+                    <li>
+                        <ul class="user-info pull-left pull-right-xs pull-none-xsm">
 
-                        <!-- Raw Notifications -->
-                        <li class="notifications dropdown">
+                            <!-- Raw Notifications -->
+                            <li class="notifications dropdown">
 
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                               data-close-others="true">
-                                <i class="entypo-attention"></i>
-                                <span class="badge badge-info">{{$notificationsCount}}</span>
-                            </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                                   data-close-others="true">
+                                    <i class="entypo-attention"></i>
+                                    <span class="badge badge-info">{{$notificationsCount}}</span>
+                                </a>
 
-                            <ul class="dropdown-menu">
-                                <li class="top">
-                                    <p class="small">
-                                        <a href="#" class="pull-right">Mark all Read</a>
-                                        You have <strong>{{$notificationsCount}}</strong> new notifications.
-                                    </p>
-                                </li>
+                                <ul class="dropdown-menu">
+                                    <li class="top">
+                                        <p class="small">
+                                            <a href="#" class="pull-right">Mark all Read</a>
+                                            You have <strong>{{$notificationsCount}}</strong> new notifications.
+                                        </p>
+                                    </li>
 
-                                <li>
-                                    <ul class="dropdown-menu-list scroller">
-                                        @foreach($notifications as $notification)
-                                            <li class="unread notification-success">
-                                                <a href="#">
-                                                    <i class="entypo-user-add pull-right"></i>
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller">
+                                            @foreach($notifications as $notification)
+                                                <li class="unread notification-success">
+                                                    <a href="#">
+                                                        <i class="entypo-user-add pull-right"></i>
 											
 											<span class="line">
 												<strong>{{$notification->notification}}</strong>
@@ -443,20 +452,20 @@
 											<span class="line small">
 												30 seconds ago
 											</span>
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
 
-                                <li class="external">
-                                    <a href="#">View all notifications</a>
-                                </li>
-                            </ul>
+                                    <li class="external">
+                                        <a href="#">View all notifications</a>
+                                    </li>
+                                </ul>
 
-                        </li>
+                            </li>
 
-                    </ul>
+                        </ul>
                     </li>
 
                     <!-- Message Notifications -->
@@ -575,7 +584,7 @@
 
                         Language: &nbsp;
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-                            <img src="assets/images/flags/flag-ng.png" width="16" height="16"/>
+                            <img src="{{URL::asset('assets/images/flags/flag-ng.png')}}" width="16" height="16"/>
                         </a>
 
                     </li>
@@ -605,7 +614,10 @@
             <div class="col-sm-12">
                 <div class="well">
                     <h4><?php echo date("M  j") . ', ' . date("Y"); ?> || <span id="clockspa"></span></h4>
-                    <h4>Welcome to<strong> Christ Way College</strong></h4>
+                    <h4>Welcome to<strong> Lynqx Group of Schools</strong></h4>
+                    @foreach($sessions as $session)
+                        <p class="label label-info" style="font-size:11px">ACADEMIC SESSION: {{$session->session}} </p>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -624,71 +636,13 @@
                     <p class="alert alert-info">{{ Session::get('message') }}</p>
                 @endif
 
-                <div class="col-sm-9">
+                <div class="col-sm-12">
 
                     @yield('content')
 
                 </div>
 
-                <div class="col-sm-3">
 
-                    <div class="tile-progress tile-red">
-                        <div class="tile-header">
-                            <h3>Students</h3>
-                            <span>Total Number of students registered this term.</span>
-                        </div>
-
-                        <div class="tile-progressbar">
-                            <span data-fill="{{$studentscount}}"></span>
-                        </div>
-
-                        <div class="tile-footer">
-                            <h4>
-                                <span class="pct-counter">0</span> students
-                            </h4>
-                            <span>so far this term</span>
-                        </div>
-                    </div>
-
-                    <div class="tile-progress tile-green">
-                        <div class="tile-header">
-                            <h3>New Students</h3>
-                            <span>Number of students who joined the school this term.</span>
-                        </div>
-
-                        <div class="tile-progressbar">
-                            <span data-fill="21"></span>
-                        </div>
-
-                        <div class="tile-footer">
-                            <h4>
-                                <span class="pct-counter">0</span> students
-                            </h4>
-
-                            <span>Newly registered student this term alone</span>
-                        </div>
-                    </div>
-
-                    <div class="tile-progress tile-aqua">
-                        <div class="tile-header">
-                            <h3>Outstanding Fees</h3>
-                            <span>Total number of students who have not paid their school fees this term.</span>
-                        </div>
-
-                        <div class="tile-progressbar">
-                            <span data-fill="89"></span>
-                        </div>
-
-                        <div class="tile-footer">
-                            <h4>
-                                <span class="pct-counter">0</span> students
-                            </h4>
-
-                            <span>students have not paid this term</span>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
 
@@ -707,8 +661,16 @@
 
 
 <!-- Imported styles on this page -->
-<link rel="stylesheet" href="{{URL::asset('assets/js/datatables/datatables.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/select2/select2-bootstrap.css')}}">
 <link rel="stylesheet" href="{{URL::asset('assets/js/select2/select2.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/selectboxit/jquery.selectBoxIt.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/daterangepicker/daterangepicker-bs3.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/minimal/_all.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/square/_all.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/flat/_all.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/futurico/futurico.css')}}">
+<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/polaris/polaris.css')}}">
+
 
 <!-- Bottom scripts (common) -->
 <script src="{{URL::asset('assets/js/gsap/TweenMax.min.js')}}"></script>
@@ -717,11 +679,21 @@
 <script src="{{URL::asset('assets/js/joinable.js')}}"></script>
 <script src="{{URL::asset('assets/js/resizeable.js')}}"></script>
 <script src="{{URL::asset('assets/js/neon-api.js')}}"></script>
-<script src="{{URL::asset('assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+
+
+<!-- Imported scripts on this page -->
 <script src="{{URL::asset('assets/js/select2/select2.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/datatables/datatables.js')}}"></script>
-
-
+<script src="{{URL::asset('assets/js/bootstrap-tagsinput.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/typeahead.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/selectboxit/jquery.selectBoxIt.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap-timepicker.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/moment.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{URL::asset('assets/js/jquery.multi-select.js')}}"></script>
+<script src="{{URL::asset('assets/js/icheck/icheck.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/neon-chat.js')}}"></script>
 
 
 <!-- JavaScripts initializations and stuff -->

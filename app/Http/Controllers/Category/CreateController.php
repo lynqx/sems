@@ -28,7 +28,7 @@ class CreateController extends LayoutsMainController
         $category = new Category;
         $input = Input::all();
         $category->category = $input['category'];
-        $category->user_id = $input['teacher'];
+        $category->teacher = $input['teacher'];
         $category->status = '1';
 
         $validator = Validator::make($input,

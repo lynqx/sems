@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Layout;
 use App\Models\Notification;
 use App\Models\Role;
+use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -29,6 +30,7 @@ class LayoutsMainController extends Controller
             $this->init();
             $this->roles();
             $this->students();
+            $this->session();
             return $next($request);
         });
     }
@@ -60,6 +62,13 @@ class LayoutsMainController extends Controller
             ->get()
             ->count();
         view()->share('studentscount', $studentscount);
+    }
+
+    protected function session()
+    {
+        $sessions = Session::where('status', '1')
+            ->get();
+        view()->share('sessions', $sessions);
     }
 
 

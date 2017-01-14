@@ -12,16 +12,24 @@
 
 
     <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">View All Classes</div>
+        <h3>View All Classes</h3>
+        <br />
 
-                <div class="panel-options">
-                    <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i
-                                class="entypo-cog"></i></a>
-                    <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
-                </div>
-            </div>
+        <script type="text/javascript">
+            jQuery( document ).ready( function( $ ) {
+                var $table4 = jQuery( "#table-4" );
+
+                $table4.DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ]
+                } );
+            } );
+        </script>
             @if ($categorys->isEmpty())
                 <div class="panel-body">
                     <p> No classes has been added for your school </p>
@@ -77,6 +85,8 @@
             @endif
         </div>
 
-    </div>
+    <link rel="stylesheet" href="{{URL::asset('assets/js/datatables/datatables.css')}}">
+    <script src="{{URL::asset('assets/js/datatables/datatables.js')}}"></script>
+
     <script type="text/javascript" src="{{ URL::asset('js/category/delete.js') }}"></script>
 @stop

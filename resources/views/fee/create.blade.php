@@ -7,7 +7,7 @@
  */
 ?>
 
-@extends('layouts.main', ['page_title'=>'Add a New Fee Category'])
+@extends('layouts.main', ['page_title'=>'Add a New Fee Type'])
 @section('content')
 
 
@@ -23,7 +23,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="panel-title">Add a New Fee Category</div>
+                <div class="panel-title">Add a New Fee Type</div>
 
                 <div class="panel-options">
                     <a href="#sample-modal" data-toggle="modal" data-target="#sample-modal-dialog-1" class="bg"><i class="entypo-cog"></i></a>
@@ -36,14 +36,14 @@
                     <form role="form" class="form-horizontal form-groups-bordered" action="/fee/create" method="post">
 
                     <div class="form-group">
-                        <label for="field-2" class="col-sm-3 control-label">Fee Category</label>
+                        <label for="field-2" class="col-sm-3 control-label">Fee Types</label>
 
                         <div class="col-sm-5">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="entypo-key"></i>
                                 </div>
-                                <input type="text" name="name" class="form-control" id="" placeholder="Fee Category" required>
+                                <input type="text" name="name" class="form-control" id="" placeholder="Fee Types" required>
                             </div>
                         </div>
                     </div>

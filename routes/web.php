@@ -56,6 +56,9 @@ Route::group(['prefix' => 'fee'], function () {
     Route::get('edit/{slug}', 'Fee\UpdateController@home');
     Route::post('edit', 'Fee\UpdateController@doEdit');
     Route::post('delete/{slug}', 'Fee\DeleteController@index');
+
+    Route::get('createlist', ['uses' => 'Fee\CreateController@feelist']);
+    Route::post('createlist', ['as' => 'fee.createlistaction', 'uses' => 'Fee\CreateController@listCreate']);
 });
 
 /***********************
@@ -69,6 +72,8 @@ Route::group(['prefix' => 'students'], function () {
     Route::get('edit/{slug}', 'Students\UpdateController@home');
     Route::post('edit', 'Students\UpdateController@doEdit');
     Route::post('delete/{slug}', 'Students\DeleteController@index');
+
+    Route::get('view/{slug}', 'Students\ViewController@home');
 });
 
 /***********************
@@ -82,7 +87,24 @@ Route::group(['prefix' => 'parents'], function () {
     Route::get('edit/{slug}', 'Parents\UpdateController@home');
     Route::post('edit', 'Parents\UpdateController@doEdit');
     Route::post('delete/{slug}', 'Parents\DeleteController@index');
+
+    Route::get('view/{slug}', 'Parents\ViewController@home');
+
 });
+
+/***********************
+ *****   Teachers  *****
+ ************************/
+Route::group(['prefix' => 'teachers'], function () {
+    Route::get('/', ['as' => 'teachers', 'uses' => 'Teachers\IndexController@home']);
+    Route::get('create', ['uses' => 'Teachers\CreateController@home']);
+    Route::post('create', ['as' => 'teachers.createaction', 'uses' => 'Teachers\CreateController@saveCreate']);
+
+    Route::get('edit/{slug}', 'Teachers\UpdateController@home');
+    Route::post('edit', 'Teachers\UpdateController@doEdit');
+    Route::post('delete/{slug}', 'Teachers\DeleteController@index');
+});
+
 
 
 Route::get('/about', function () {

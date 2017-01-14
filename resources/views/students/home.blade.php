@@ -53,24 +53,38 @@
             @foreach($users as $user)
             <tr class="odd gradeX">
                 <td>{{$user->uid}}</td>
-                <td>{{$user->fname}}</td>
+                <td>{{$user->fname}} {{$user->middlename}} {{$user->lname}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->gender}}</td>
                 <td>{{$user->class}}</td>
-                <td><a href="{{action('Fee\UpdateController@home', $user->id) }}"
-                       class="btn btn-success"> Edit </a>
+                <td>
+                    <div class="btn-group left-dropdown">
+                        <button type="button" class="btn btn-danger">Actions</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
 
-                    <a href="javascript;"
-                       class="btn btn-danger"
-                       data-delete="{{$user->id}}">
-                        Delete
-                    </a>
+                        <ul class="dropdown-menu dropdown-info" role="menu">
+                            <li><a href="{{action('Students\ViewController@home', $user->uid) }}">View</a>
+                            </li>
+                            <li><a href="{{action('Students\UpdateController@home', $user->uid) }}">Edit</a>
+                            </li>
+                            <li><a href="#">Deactivate</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="javascript;"
+                                   data-delete="{{$user->uid}}">
+                                    Delete
+                                </a>
 
-                    <form id="delete-form-{{$user->id}}"
-                          action="{{ action('Fee\DeleteController@index', $user->id) }}"
-                          method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
+                                <form id="delete-form-{{$user->uid}}"
+                                      action="{{ action('Students\DeleteController@index', $user->uid) }}"
+                                      method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
 
@@ -91,5 +105,10 @@
             @endif
 
     </div>
+
+    <link rel="stylesheet" href="{{URL::asset('assets/js/datatables/datatables.css')}}">
+    <script src="{{URL::asset('assets/js/datatables/datatables.js')}}"></script>
+
     <script type="text/javascript" src="{{ URL::asset('js/category/delete.js') }}"></script>
+
 @stop

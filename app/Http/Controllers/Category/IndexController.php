@@ -16,7 +16,7 @@ class IndexController extends LayoutsMainController
         //$categorys = Category::with('users')->get();
         //$categorys = Category::find(1);
         $categorys = Category::select('*','categories.cat_id as categories_id', 'users.firstname as fname', 'users.lastname as lname')
-            ->leftjoin('users', 'categories.user_id', '=', 'users.id')
+            ->leftjoin('users', 'categories.teacher', '=', 'users.id')
             ->orderBy('categories_id', 'desc')
         //->join('users', 'articles.user_id', '=', 'user.id')
 
