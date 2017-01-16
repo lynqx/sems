@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class MaritalStatusTable extends Migration
 {
@@ -13,32 +13,11 @@ class MaritalStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('m_status', function (Blueprint $table) {
+        Schema::create('marital_statuses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('status');
             $table->timestamps();
         });
-
-        // Insert some stuff
-        DB::table('m_status')->insert(
-            array(
-                [
-                    'status' => 'Single'
-                ],
-                [
-                    'status' => 'Married'
-                ],
-                [
-                    'status' => 'Seperated'
-                ],
-                [
-                    'status' => 'Divorced'
-                ],
-                [
-                    'status' => 'Widowed'
-                ]
-            )
-        );
     }
 
     /**
@@ -48,7 +27,7 @@ class MaritalStatusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('m_status');
+        Schema::drop('marital_statuses');
 
     }
 }

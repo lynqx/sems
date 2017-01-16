@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class UserBiodataTable extends Migration
 {
@@ -19,7 +19,7 @@ class UserBiodataTable extends Migration
             $table->integer('gender');
             $table->integer('m_status');
             $table->string('dob');
-            $table->integer('mobile');
+            $table->bigInteger('mobile');
             $table->string('address');
             $table->timestamps();
         });

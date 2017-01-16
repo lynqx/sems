@@ -29,7 +29,7 @@
                 <form role="form" class="form-horizontal form-groups-bordered" action="/parents/create" method="post">
 
                     <div class="form-group">
-                        @if ($categorys->isEmpty())
+                        @if ($students->isEmpty())
                             <div class="panel-body">
                                 <p> No student available at the moment</p>
                             </div>

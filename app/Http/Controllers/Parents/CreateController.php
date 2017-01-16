@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Parents;
 
+use App\Events\SmsEvent;
 use App\Http\Controllers\LayoutsMainController;
 use App\Models\Biodata;
 use App\Models\Category;
 use App\Models\Gender;
+use App\Models\MaritalStatus;
 use App\Models\ParentStudent;
-use App\Models\Status;
-use App\Models\StudentClass;
+use App\Models\Role;
+use App\Models\Sms;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
@@ -23,11 +23,14 @@ class CreateController extends LayoutsMainController
     public function home()
     {
         $genders = Gender::all();
-        $status = Status::all();
+        $status = MaritalStatus::all();
         $categorys = Category::all();
+        $student_role = Role::query()
+            ->where('role', 'Students')
+            ->first();
         $students = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role')
             ->leftjoin('roles', 'users.role', '=', 'roles.id')
-            ->where('users.role', '4')
+            ->where('users.role', $student_role->id)
             ->get();
         return View('parents.create', ['genders' => $genders, 'status' => $status, 'categorys' => $categorys,
             'students' => $students]);
@@ -36,6 +39,10 @@ class CreateController extends LayoutsMainController
 
     public function saveCreate()
     {
+        $sms = new Sms();
+        $sms->recipient = Input::get('mobile');
+        $sms->message = "Dear " . Input::get('firstname') . ", we have just created an account for you on our students portal";
+        event(new SmsEvent($sms));
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
@@ -81,7 +88,6 @@ class CreateController extends LayoutsMainController
             try {
                 $insertedId = $user->id;
                 $biodata = new Biodata;
-
                 $biodata->user_id = $insertedId;
                 $biodata->gender = $input['gender'];
                 $biodata->m_status = $input['m_status'];
@@ -119,7 +125,10 @@ class CreateController extends LayoutsMainController
                 DB::rollback();
                 throw $e;
             }
-
+            $sms = new Sms();
+            $sms->recipient = Input::get('mobile');
+            $sms->message = "Dear " . Input::get('firstname') . ", we have just created an account for you on our students portal";
+            event(new SmsEvent($sms));
 
 // If we reach here, then
 // data is valid and working.

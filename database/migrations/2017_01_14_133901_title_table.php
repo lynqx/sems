@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class TitleTable extends Migration
 {
@@ -13,41 +13,11 @@ class TitleTable extends Migration
      */
     public function up()
     {
-        Schema::create('title', function (Blueprint $table) {
+        Schema::create('titles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->timestamps();
         });
-
-        // Insert some stuff
-        DB::table('title')->insert(
-            array(
-                [
-                    'title' => 'Ms'
-                ],
-                [
-                    'title' => 'Miss'
-                ],
-                [
-                    'title' => 'Mr'
-                ],
-                [
-                    'title' => 'Mrs'
-                ],
-                [
-                    'title' => 'Alhaji'
-                ],
-                [
-                    'title' => 'Alhaja'
-                ],
-                [
-                    'title' => 'Comrade'
-                ],
-                [
-                    'title' => 'Pastor'
-                ]
-            )
-        );
     }
 
     /**
@@ -57,6 +27,6 @@ class TitleTable extends Migration
      */
     public function down()
     {
-        Schema::drop('title');
+        Schema::drop('titles');
     }
 }

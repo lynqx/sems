@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class GenderTable extends Migration
 {
@@ -18,18 +18,6 @@ class GenderTable extends Migration
             $table->string('gender');
             $table->timestamps();
         });
-
-        // Insert some stuff
-        DB::table('genders')->insert(
-            array(
-                [
-                    'gender' => 'Male'
-                ],
-                [
-                    'gender' => 'Female'
-                ]
-            )
-        );
     }
 
     /**
