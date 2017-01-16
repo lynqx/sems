@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\LayoutsMainController;
 use App\Models\FeeList;
+use App\Models\Gender;
+use App\Models\Status;
 use App\Models\StudentCourse;
 use App\Models\TeacherClass;
 use App\Models\User;
@@ -16,11 +18,13 @@ class ViewController extends LayoutsMainController
     public function home($slug)
     {
         $users = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role',
-            'categories.category as class', 'categories.teacher as teacher')
-            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
+            'categories.category as class', 'categories.teacher as teacher', 'student_biodata.m_status as sex')
+            ->leftjoin('student_biodata', 'users.id', '=', 'student_biodata.user_id')
+            ->leftjoin('user_contact', 'users.id', '=', 'user_contact.user_id')
             ->leftjoin('roles', 'users.role', '=', 'roles.id')
-            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
+            ->leftjoin('genders', 'student_biodata.gender', '=', 'genders.id')
             ->leftjoin('student_class', 'users.id', '=', 'student_class.user_id')
+            ->leftjoin('parent_student', 'users.id', '=', 'parent_student.student')
             ->leftjoin('categories', 'student_class.categories_id', '=', 'categories.cat_id')
             ->leftjoin('fee_lists', 'categories.cat_id', '=', 'fee_lists.categories')
             ->leftjoin('fee_types', 'fee_lists.fee_types', '=', 'fee_types.id')
@@ -28,12 +32,13 @@ class ViewController extends LayoutsMainController
             ->limit('1')
             ->get();
 
-        if(isset($users) && $users != "") {
+        if (isset($users) && $users != "") {
             foreach ($users as $user) {
                 $category = $user['cat_id'];
                 $teacher = $user['teacher'];
+                $parent = $user['parent'];
             }
-        } else  {
+        } else {
             return Redirect::to('students');
         }
 
@@ -54,18 +59,25 @@ class ViewController extends LayoutsMainController
             ->where('users.id', $teacher)
             ->get();
 
+        $parents = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname',
+            'user_biodata.mobile as phone')
+            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
+            ->leftjoin('user_contact', 'users.id', '=', 'user_contact.user_id')
+            ->where('users.id', $parent)
+            ->get();
+
         $subjects = StudentCourse::select('*')
             ->leftjoin('courses', 'student_course.course', '=', 'courses.id')
             ->where('student_course.user', $slug)
             ->get();
 
+        $genders = Gender::all();
+        $status = Status::all();
+
         return View('students.view', ['users' => $users, 'fees' => $fees, 'totals' => $totals
-            , 'teachers' => $teachers, 'subjects' => $subjects]);
+            , 'teachers' => $teachers, 'subjects' => $subjects, 'genders' => $genders, 'status' => $status,
+            'parents' => $parents]);
     }
-
-
-
-
 
 
     public function doEdit()
@@ -87,7 +99,7 @@ class ViewController extends LayoutsMainController
         } else {
 
         }
-        if($category->save()) {
+        if ($category->save()) {
             return Redirect::action('Category\IndexController@home')->with('message', 'Class edited successfully!');
         } else {
             return Redirect::action('Category\IndexController@home')->with('message', 'The class was not updated. Please try again!');

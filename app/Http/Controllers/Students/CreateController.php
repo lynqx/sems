@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\LayoutsMainController;
-use App\Models\Biodata;
 use App\Models\Category;
+use App\Models\Course;
 use App\Models\Gender;
 use App\Models\Status;
+use App\Models\StudentBiodata;
 use App\Models\StudentClass;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -74,7 +75,7 @@ class CreateController extends LayoutsMainController
 
             try {
                 $insertedId = $user->id;
-                $biodata = new Biodata;
+                $biodata = new StudentBiodata;
 
                 $biodata->user_id = $insertedId;
                 $biodata->gender = $input['gender'];
@@ -124,4 +125,11 @@ class CreateController extends LayoutsMainController
 
         }
     }
+
+    public function subject()
+    {
+        $courses = Course::all();
+        return View('students.subjects', ['courses' => $courses]);
+    }
+
 }

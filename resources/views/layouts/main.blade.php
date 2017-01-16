@@ -206,6 +206,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{action('Students\CreateController@subject')}}">
+                                <i class="entypo-inbox"></i>
+                                <span class="title">Assign Subjects</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{action('Students\IndexController@home')}}">
                                 <i class="entypo-pencil"></i>
                                 <span class="title">View Students by Class</span>
@@ -260,18 +266,18 @@
                     </ul>
                 </li>
                 <li class="has-sub">
-                    <a href="forms-main.html">
+                    <a href="#">
                         <i class="entypo-doc-text"></i>
-                        <span class="title">Courses</span>
+                        <span class="title">Subjects</span>
                     </a>
                     <ul>
                         <li>
-                            <a href="forms-main.html">
+                            <a href="{{action('Subjects\CreateController@home')}}">
                                 <span class="title">Add a New Subject</span>
                             </a>
                         </li>
                         <li>
-                            <a href="forms-advanced.html">
+                            <a href="{{action('Subjects\IndexController@home')}}">
                                 <span class="title">View all Subjects</span>
                             </a>
                         </li>
@@ -615,9 +621,12 @@
                 <div class="well">
                     <h4><?php echo date("M  j") . ', ' . date("Y"); ?> || <span id="clockspa"></span></h4>
                     <h4>Welcome to<strong> Lynqx Group of Schools</strong></h4>
-                    @foreach($sessions as $session)
-                        <p class="label label-info" style="font-size:11px">ACADEMIC SESSION: {{$session->session}} </p>
-                    @endforeach
+
+                    <p class="label label-info" style="font-size:11px">ACADEMIC SESSION:
+                        @foreach($sessions as $session)
+                            {{$session->session}}
+                        @endforeach
+                    </p>
                 </div>
             </div>
         </div>

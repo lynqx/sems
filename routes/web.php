@@ -46,6 +46,21 @@ Route::group(['prefix' => 'category'], function () {
 
 
 /***********************
+ *****   Subjects  *****
+ ************************/
+Route::group(['prefix' => 'subjects'], function () {
+    Route::get('/', ['as' => 'subjects', 'uses' => 'Subjects\IndexController@home']);
+    Route::get('create', ['uses' => 'Subjects\CreateController@home']);
+    Route::post('create', ['as' => 'subjects.createaction', 'uses' => 'Subjects\CreateController@saveCreate']);
+
+    //Route::model('category', 'App\Category');
+    Route::get('edit/{slug}', 'Subjects\UpdateController@home');
+    Route::post('edit', 'Subjects\UpdateController@doEdit');
+    Route::post('delete/{slug}', 'Subjects\DeleteController@index');
+});
+
+
+/***********************
  *****   Fees  *****
  ************************/
 Route::group(['prefix' => 'fee'], function () {
@@ -74,6 +89,9 @@ Route::group(['prefix' => 'students'], function () {
     Route::post('delete/{slug}', 'Students\DeleteController@index');
 
     Route::get('view/{slug}', 'Students\ViewController@home');
+
+    Route::get('subject', ['uses' => 'Students\CreateController@subject']);
+    Route::post('subject', ['as' => 'students.subjectaction', 'uses' => 'Students\CreateController@saveSubject']);
 });
 
 /***********************
