@@ -2,25 +2,26 @@
 
 namespace App\Events;
 
+use App\Models\Sms;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Queue\SerializesModels;
 
 class SmsEvent
 {
     use InteractsWithSockets, SerializesModels;
 
+    public $sms;
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Sms $sms
      */
-    public function __construct()
+    public function __construct(Sms $sms)
     {
-        //
+        $this->sms = $sms;
     }
 
     /**

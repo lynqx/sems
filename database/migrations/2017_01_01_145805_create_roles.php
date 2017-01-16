@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateRoles extends Migration
 {
@@ -18,24 +18,6 @@ class CreateRoles extends Migration
             $table->string('role');
             $table->timestamps();
         });
-
-        // Insert some stuff
-        DB::table('roles')->insert(
-            array(
-                [
-                    'role' => 'Admin'
-                ],
-                [
-                    'role' => 'Parents'
-                ],
-                [
-                    'role' => 'Students'
-                ],
-                [
-                    'role' => 'Teachers'
-                ]
-            )
-        );
     }
 
     /**
