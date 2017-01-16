@@ -37,7 +37,7 @@
                             <label for="field-2" class="col-sm-2 control-label">Class</label>
 
                             <div class="col-sm-10">
-                                <select name="category" class="select2" data-allow-clear="true" data-placeholder="Select a Class..." required>
+                                <select name="category" class="select2" required="required" data-allow-clear="true" data-placeholder="Select a Class...">
                                     <option></option>
                                     @foreach($categorys as $category)
                                         <option value="{{$category->cat_id}}">{{$category->category}}</option>

@@ -18,6 +18,7 @@ class LayoutsMainController extends Controller
     public $user;
     public $roles;
     public $students;
+    public $session;
 
     public function __construct()
     {
