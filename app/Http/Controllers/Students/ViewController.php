@@ -18,7 +18,7 @@ class ViewController extends LayoutsMainController
     public function home($slug)
     {
         $users = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role',
-            'categories.category as class', 'categories.teacher as teacher', 'student_biodata.m_status as sex')
+            'categories.category as class', 'categories.teacher as teacher', 'student_biodata.gender as sex')
             ->leftjoin('student_biodata', 'users.id', '=', 'student_biodata.user_id')
             ->leftjoin('user_contact', 'users.id', '=', 'user_contact.user_id')
             ->leftjoin('roles', 'users.role', '=', 'roles.id')
@@ -32,11 +32,16 @@ class ViewController extends LayoutsMainController
             ->limit('1')
             ->get();
 
+//        $selected = $users['sex'];
+
         if (isset($users) && $users != "") {
             foreach ($users as $user) {
                 $category = $user['cat_id'];
                 $teacher = $user['teacher'];
                 $parent = $user['parent'];
+                $selected = $user->sex;
+
+
             }
         } else {
             return Redirect::to('students');
@@ -76,7 +81,7 @@ class ViewController extends LayoutsMainController
 
         return View('students.view', ['users' => $users, 'fees' => $fees, 'totals' => $totals
             , 'teachers' => $teachers, 'subjects' => $subjects, 'genders' => $genders, 'status' => $status,
-            'parents' => $parents]);
+            'parents' => $parents, 'selected' => $selected]);
     }
 
 

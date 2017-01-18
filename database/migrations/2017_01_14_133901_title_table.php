@@ -27,6 +27,6 @@ class TitleTable extends Migration
      */
     public function down()
     {
-        Schema::drop('titles');
+        Schema::dropIfExists('titles');
     }
 }

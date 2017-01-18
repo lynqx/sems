@@ -32,7 +32,7 @@ class UserContactTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_contact');
+        Schema::dropIfExists('user_contact');
 
     }
 }

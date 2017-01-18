@@ -69,6 +69,10 @@
                             </li>
                             <li><a href="{{action('Students\UpdateController@home', $user->uid) }}">Edit</a>
                             </li>
+                            <li><a href="{{action('Students\SubjectController@home', $user->uid) }}">Register Subjects</a>
+                            </li>
+                            <li><a href="{{action('Students\ResultController@home', $user->uid) }}">Post Results</a>
+                            </li>
                             <li><a href="#">Deactivate</a>
                             </li>
                             <li class="divider"></li>

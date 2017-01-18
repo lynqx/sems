@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Category;
+namespace App\Http\Controllers\Sessions;
 
 use App\Http\Controllers\LayoutsMainController;
-use App\Models\Role;
+use App\Models\Course;
+use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
-use App\Models\lga;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
@@ -18,37 +18,33 @@ class CreateController extends LayoutsMainController
 {
     public function home()
     {
-        $teacher_role = Role::query()
-            ->where('role', 'Teachers')
-            ->first();
-
-        $users = User::where('role', $teacher_role->id)
-            ->get();
-        return View('category.create', ['users' => $users]);
+        return View('sessions.create');
     }
 
 
     public function saveCreate()
     {
-        $category = new Category;
+        $session = new Session;
         $input = Input::all();
-        $category->category = $input['category'];
-        $category->teacher = $input['teacher'];
-        $category->status = '1';
+        $session->session = $input['session'];
+        $session->status = '1';
 
         $validator = Validator::make($input,
             array(
-                'category' => 'required|unique:categories,category|min:3',
-                'teacher' => 'required'
+                'session' => 'required|unique:sessions,session'
             )
         );
         if ($validator->fails()) {
-            return Redirect::to('category/create')->with('errors', $validator->messages());
+            return Redirect::to('sessions/create')->with('errors', $validator->messages());
 
         } else {
-            $category->save();
 
-            return Redirect::action('Category\IndexController@home')->with('message', 'Class created successfully!');
+            Session::where('status', 1)
+                ->update(['status' => 0]);
+
+            $session->save();
+
+            return Redirect::action('Sessions\CreateController@home')->with('message', 'Session added successfully!');
 
         }
     }

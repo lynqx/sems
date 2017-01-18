@@ -30,7 +30,7 @@ class FeeListsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('fee_lists');
+        Schema::dropIfExists('fee_lists');
 
     }
 }

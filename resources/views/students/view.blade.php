@@ -209,8 +209,7 @@
                                                                         data-placeholder="Select a Gender..." required>
                                                                     <option></option>
                                                                     @foreach($genders as $gender)
-                                                                        <option value="{{$gender->id}}"
-                                                                                selected="{{$user->gender}}">{{$gender->gender}}</option>
+                                                                        <option value="{{$gender->id}}">{{$gender->gender}}</option>
                                                                     @endforeach
                                                                 </select>
 
@@ -231,8 +230,7 @@
                                                                         data-placeholder="Select a Status..." required>
                                                                     <option></option>
                                                                     @foreach($status as $mstat)
-                                                                        <option value="{{$mstat->id}}"
-                                                                                selected="{{$user->sex}}">{{$mstat->status}}</option>
+                                                                        <option value="{{$mstat->id}}">{{$mstat->status}}</option>
                                                                     @endforeach
                                                                 </select>
 
@@ -327,7 +325,7 @@
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                                                     </div>
                                                 </div>
-                                                </form>
+                                            </form>
                                         </div>
                                         @endforeach
 
@@ -492,72 +490,85 @@
                                         </div>
 
                                         <div class="panel-body">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                <tr>
-                                                    <th>Fee Categories</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                                </thead>
+                                            @if ($fees->isEmpty())
+                                                <div class="panel-body">
+                                                    <p> No Invoice for this students available, Please contact the
+                                                        school for further details</p>
+                                                </div>
+                                            @else
 
-                                                <tbody>
-                                                @foreach($fees as $fee)
+                                                <table class="table table-bordered">
+                                                    <thead>
                                                     <tr>
-                                                        <td>{{$fee->fee_type}}</td>
-                                                        <td>{{$fee->amount}}</td>
+                                                        <th>Fee Categories</th>
+                                                        <th>Amount</th>
                                                     </tr>
+                                                    </thead>
 
-                                                @endforeach
-                                                <form role="form" class="form-horizontal form-groups-bordered"
-                                                      action="/fee/pay" method="post">
-                                                    <tr>
-                                                        <td> TOTAL</td>
-                                                        <td>
-                                                            <div class="form-group">
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="entypo-newspaper"></i>
+                                                    <tbody>
+                                                    @foreach($fees as $fee)
+                                                        <tr>
+                                                            <td>{{$fee->fee_type}}</td>
+                                                            <td>{{$fee->amount}}</td>
+                                                        </tr>
+
+                                                    @endforeach
+                                                    <form role="form" class="form-horizontal form-groups-bordered"
+                                                          action="/fee/pay" method="post">
+                                                        <tr>
+                                                            <td> TOTAL</td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon">
+                                                                            <i class="entypo-newspaper"></i>
+                                                                        </div>
+                                                                        @foreach($totals as $total)
+                                                                            <input type="number" name="amount"
+                                                                                   class="form-control"
+                                                                                   value="{{$total->totalamount}}"
+                                                                                   required
+                                                                                   readonly>
+                                                                        @endforeach
                                                                     </div>
-                                                                    @foreach($totals as $total)
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Installments</td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon">
+                                                                            <i class="entypo-newspaper"></i>
+                                                                        </div>
                                                                         <input type="number" name="amount"
                                                                                class="form-control"
-                                                                               value="{{$total->totalamount}}" required
-                                                                               readonly>
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Installments</td>
-                                                        <td>
-                                                            <div class="form-group">
-                                                                <div class="input-group">
-                                                                    <div class="input-group-addon">
-                                                                        <i class="entypo-newspaper"></i>
+                                                                               placeholder="Installmental Payment"
+                                                                               required>
                                                                     </div>
-                                                                    <input type="number" name="amount"
-                                                                           class="form-control"
-                                                                           placeholder="Installmental Payment" required>
                                                                 </div>
-                                                            </div>
-                                                            <small> If installmental field is empty, system assumes you
-                                                                are paying the total amount
-                                                            </small>
+                                                                <small> If installmental field is empty, system assumes
+                                                                    you
+                                                                    are paying the total amount
+                                                                </small>
 
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <input type="hidden" name="student" value="{{$user->uid}}"/>
-                                                            <button type="submit" class="btn btn-danger btn-block"> Pay
-                                                                Invoice
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </form>
-                                                </tbody>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <input type="hidden" name="student"
+                                                                       value="{{$user->uid}}"/>
+                                                                <button type="submit" class="btn btn-danger btn-block">
+                                                                    Pay
+                                                                    Invoice
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </form>
+                                                    </tbody>
+                                                </table>
+                                            @endif
 
                                         </div>
 
@@ -606,26 +617,31 @@
                                                 <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
                                             </div>
                                         </div>
-
-                                        @foreach($teachers as $teacher)
+                                        @if($teachers->isEmpty())
                                             <div class="panel-body">
-                                                <center>
-                                                    <div class="lockscreen-thumb">
-                                                        <img src="{{URL::asset('assets/images/lockscreen-user.png')}}"
-                                                             width="140"
-                                                             class="img-circle"/>
-
-                                                    </div>
-                                                    <h3>{{$teacher->fname}} {{$teacher->middlename}} {{$teacher->lname}}</h3>
-
-                                                    <h4><i class="entypo-phone"></i> {{$teacher->mobile}} </h4>
-                                                    <hr>
-                                                    <h4><i class="entypo-mail"></i> </span> {{$teacher->email}} </h4>
-
-                                                </center>
+                                                <p> Class Teacher not available for this student yet </p>
                                             </div>
-                                        @endforeach
+                                        @else
+                                            @foreach($teachers as $teacher)
+                                                <div class="panel-body">
+                                                    <center>
+                                                        <div class="lockscreen-thumb">
+                                                            <img src="{{URL::asset('assets/images/lockscreen-user.png')}}"
+                                                                 width="140"
+                                                                 class="img-circle"/>
 
+                                                        </div>
+                                                        <h3>{{$teacher->fname}} {{$teacher->middlename}} {{$teacher->lname}}</h3>
+
+                                                        <h4><i class="entypo-phone"></i> {{$teacher->mobile}} </h4>
+                                                        <hr>
+                                                        <h4><i class="entypo-mail"></i> </span> {{$teacher->email}}
+                                                        </h4>
+
+                                                    </center>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

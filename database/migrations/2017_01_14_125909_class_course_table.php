@@ -17,6 +17,7 @@ class ClassCourseTable extends Migration
             $table->increments('id');
             $table->integer('class');
             $table->integer('course');
+            $table->integer('criteria');
             $table->boolean('status');
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ class ClassCourseTable extends Migration
      */
     public function down()
     {
-        Schema::drop('class_course');
+        Schema::dropIfExists('class_course');
     }
 }

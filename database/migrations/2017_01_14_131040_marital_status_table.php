@@ -27,7 +27,7 @@ class MaritalStatusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('marital_statuses');
+        Schema::dropIfExists('marital_statuses');
 
     }
 }
