@@ -41,6 +41,6 @@ class UsersTableSeeder extends Seeder
         $student_user = User::create(array('firstname' => 'Student', 'middlename' => 'Student', 'lastname' => 'Student',
             'email' => 'student@student.com', 'password' => Hash::make('student'),
             'remember_token' => '_token', 'active' => '1'));
-        $teacher_user->roles()->attach($student_role->id);
+        $student_user->roles()->attach($student_role->id);
     }
 }

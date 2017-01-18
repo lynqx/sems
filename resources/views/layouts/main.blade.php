@@ -202,12 +202,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{action('Students\CreateController@subject')}}">
-                                    <i class="entypo-inbox"></i>
-                                    <span class="title">Assign Subjects</span>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="{{action('Students\IndexController@home')}}">
                                     <i class="entypo-pencil"></i>
                                     <span class="title">View Students by Class</span>
