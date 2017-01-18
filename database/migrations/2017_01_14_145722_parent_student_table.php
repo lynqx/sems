@@ -28,7 +28,7 @@ class ParentStudentTable extends Migration
      */
     public function down()
     {
-        Schema::drop('parent_student');
+        Schema::dropIfExists('parent_student');
 
     }
 }

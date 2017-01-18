@@ -32,7 +32,7 @@ class UserBiodataTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_biodata');
+        Schema::dropIfExists('user_biodata');
 
     }
 }

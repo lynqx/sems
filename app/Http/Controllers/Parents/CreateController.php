@@ -28,6 +28,7 @@ class CreateController extends LayoutsMainController
         $student_role = Role::query()
             ->where('role', 'Students')
             ->first();
+
         $students = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role')
             ->leftjoin('roles', 'users.role', '=', 'roles.id')
             ->where('users.role', $student_role->id)
@@ -39,10 +40,14 @@ class CreateController extends LayoutsMainController
 
     public function saveCreate()
     {
-        $sms = new Sms();
+        /*$sms = new Sms();
         $sms->recipient = Input::get('mobile');
         $sms->message = "Dear " . Input::get('firstname') . ", we have just created an account for you on our students portal";
-        event(new SmsEvent($sms));
+        event(new SmsEvent($sms));*/
+        $parent_role = Role::query()
+            ->where('role', 'Parents')
+            ->first();
+
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
@@ -70,7 +75,7 @@ class CreateController extends LayoutsMainController
                 $pwd = rand('1000', '1000000');
                 $user->password = Hash::make($pwd);
                 $user->remember_token = $input['_token'];
-                $user->role = '2';
+                $user->role = $parent_role->id;
                 $user->active = '1';
                 $user->save();
             } catch (ValidationException $e) {
@@ -93,7 +98,7 @@ class CreateController extends LayoutsMainController
                 $biodata->m_status = $input['m_status'];
                 $biodata->dob = $input['dob'];
                 $biodata->mobile = $input['mobile'];
-                $biodata->address = $input['address'];;
+                $biodata->address = $input['address'];
                 $biodata->save();
             } catch (ValidationException $e) {
                 // Rollback and then redirect
@@ -110,7 +115,6 @@ class CreateController extends LayoutsMainController
             try {
                 $insertedId = $user->id;
                 $parentstudent = new ParentStudent;
-
                 $parentstudent->parent = $insertedId;
                 $parentstudent->student = $input['student'];
                 $parentstudent->save();

@@ -31,7 +31,21 @@ Route::get('/', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
 
 
 /***********************
- *****   Category  *****
+ *****   Sessions  *****
+ ************************/
+Route::group(['prefix' => 'sessions'], function () {
+    Route::get('/', ['as' => 'sessions', 'uses' => 'Sessions\IndexController@home']);
+    Route::get('create', ['uses' => 'Sessions\CreateController@home']);
+    Route::post('create', ['as' => 'sessions.createaction', 'uses' => 'Sessions\CreateController@saveCreate']);
+
+    Route::get('edit/{slug}', 'Sessions\UpdateController@home');
+    Route::post('edit', 'Sessions\UpdateController@doEdit');
+    Route::post('delete/{slug}', 'Sessions\DeleteController@index');
+});
+
+
+/***********************
+ *****   Category / Class  *****
  ************************/
 Route::group(['prefix' => 'category'], function () {
     Route::get('/', ['as' => 'category', 'uses' => 'Category\IndexController@home']);
@@ -53,10 +67,15 @@ Route::group(['prefix' => 'subjects'], function () {
     Route::get('create', ['uses' => 'Subjects\CreateController@home']);
     Route::post('create', ['as' => 'subjects.createaction', 'uses' => 'Subjects\CreateController@saveCreate']);
 
-    //Route::model('category', 'App\Category');
     Route::get('edit/{slug}', 'Subjects\UpdateController@home');
     Route::post('edit', 'Subjects\UpdateController@doEdit');
     Route::post('delete/{slug}', 'Subjects\DeleteController@index');
+
+    Route::get('class', ['uses' => 'Subjects\ClassController@home']);
+    Route::post('class', ['as' => 'subjects.createaction', 'uses' => 'Subjects\ClassController@saveClass']);
+
+
+
 });
 
 
@@ -90,8 +109,12 @@ Route::group(['prefix' => 'students'], function () {
 
     Route::get('view/{slug}', 'Students\ViewController@home');
 
-    Route::get('subject', ['uses' => 'Students\CreateController@subject']);
-    Route::post('subject', ['as' => 'students.subjectaction', 'uses' => 'Students\CreateController@saveSubject']);
+    Route::get('subject/{slug}', ['uses' => 'Students\SubjectController@home']);
+    Route::post('subject', ['as' => 'students.subjectaction', 'uses' => 'Students\SubjectController@saveSubject']);
+
+
+    Route::get('result/{slug}', ['uses' => 'Students\ResultController@home']);
+    Route::post('result', ['as' => 'students.resultaction', 'uses' => 'Students\ResultController@saveResult']);
 });
 
 /***********************

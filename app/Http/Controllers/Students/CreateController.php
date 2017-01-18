@@ -6,6 +6,7 @@ use App\Http\Controllers\LayoutsMainController;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Gender;
+use App\Models\Role;
 use App\Models\Status;
 use App\Models\StudentBiodata;
 use App\Models\StudentClass;
@@ -31,6 +32,10 @@ class CreateController extends LayoutsMainController
 
     public function saveCreate()
     {
+        $student_role = Role::query()
+            ->where('role', 'Students')
+            ->first();
+
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
@@ -58,7 +63,7 @@ class CreateController extends LayoutsMainController
                 $pwd = rand('1000', '1000000');
                 $user->password = Hash::make($pwd);
                 $user->remember_token = $input['_token'];
-                $user->role = '4';
+                $user->role = $student_role->id;
                 $user->active = '1';
                 $user->save();
             } catch (ValidationException $e) {
@@ -124,12 +129,6 @@ class CreateController extends LayoutsMainController
             return Redirect::action('Students\IndexController@home')->with('message', 'Student registered successfully!');
 
         }
-    }
-
-    public function subject()
-    {
-        $courses = Course::all();
-        return View('students.subjects', ['courses' => $courses]);
     }
 
 }

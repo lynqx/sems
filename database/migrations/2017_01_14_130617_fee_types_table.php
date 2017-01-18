@@ -28,7 +28,7 @@ class FeeTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('fee_types');
+        Schema::dropIfExists('fee_types');
 
     }
 }
