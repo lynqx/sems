@@ -39,10 +39,6 @@ class CreateController extends LayoutsMainController
 
     public function saveCreate()
     {
-        $sms = new Sms();
-        $sms->recipient = Input::get('mobile');
-        $sms->message = "Dear " . Input::get('firstname') . ", we have just created an account for you on our students portal";
-        event(new SmsEvent($sms));
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
