@@ -421,6 +421,21 @@
                         </ul>
                     </li>
                 @endif
+                @if(Auth::user()->hasRole('Parents'))
+                    <li class="has-sub">
+                        <a href="#">
+                            <i class="entypo-layout"></i>
+                            <span class="title">Children</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{action('Children\IndexController@home')}}">
+                                    <span class="title">View all Children</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
 
         </div>

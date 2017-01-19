@@ -146,6 +146,26 @@ Route::group(['prefix' => 'teachers'], function () {
     Route::post('delete/{slug}', 'Teachers\DeleteController@index');
 });
 
+/***********************
+ *****   Children  *****
+ ************************/
+Route::group(['prefix' => 'children'], function () {
+    Route::get('/', ['as' => 'children', 'uses' => 'Children\IndexController@home']);
+    Route::get('/{slug}/pay', ['as' => 'children_payment', 'uses' => 'Children\PaymentController@home']);
+});
+
+
+
+/***********************
+ *****   Paystack  *****
+ ************************/
+Route::post('/pay', [
+    'uses' => 'Children\PaymentController@redirectToGateway',
+    'as' => 'pay'
+]);
+
+Route::get('/payment/callback', 'Children\PaymentController@handleGatewayCallback');
+
 
 
 Route::get('/about', function () {

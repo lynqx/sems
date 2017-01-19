@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
         $admin_user->roles()->attach($admin_role->id);
 
         $parent_user = User::create(array('firstname' => 'Parent', 'middlename' => 'Parent', 'lastname' => 'Parent',
-            'email' => 'parent@parent.com', 'password' => Hash::make('parent'),
+            'email' => 'parent@example.com', 'password' => Hash::make('parent'),
             'remember_token' => '_token',  'active' => '1'));
         $parent_user->roles()->attach($parent_role->id);
 
