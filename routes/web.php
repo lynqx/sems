@@ -147,6 +147,22 @@ Route::group(['prefix' => 'teachers'], function () {
 });
 
 
+/***********************
+ *****   Library  *****
+ ************************/
+Route::group(['prefix' => 'library'], function () {
+    Route::get('/', ['as' => 'library', 'uses' => 'Library\IndexController@home']);
+    Route::get('create', ['uses' => 'Library\CreateController@home']);
+    Route::post('create', ['as' => 'library.createaction', 'uses' => 'Library\CreateController@saveCreate']);
+
+    Route::get('edit/{slug}', 'Library\UpdateController@home');
+    Route::post('edit', 'Library\UpdateController@doEdit');
+    Route::post('delete/{slug}', 'Library\DeleteController@index');
+});
+
+
+
+
 
 Route::get('/about', function () {
     return 'This is our about page';

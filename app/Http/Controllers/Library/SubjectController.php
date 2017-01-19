@@ -60,7 +60,6 @@ class SubjectController extends LayoutsMainController
         $sms->recipient = Input::get('mobile');
         $sms->message = "Dear " . Input::get('firstname') . ", we have just created an account for you on our students portal";
         event(new SmsEvent($sms));*/
-        
         $student_role = Role::query()
             ->where('role', 'Students')
             ->first();

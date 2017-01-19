@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teachers;
 use App\Http\Controllers\LayoutsMainController;
 use App\Models\Biodata;
 use App\Models\Gender;
+use App\Models\Role;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,6 +28,10 @@ class CreateController extends LayoutsMainController
 
     public function saveCreate()
     {
+        $teacher_role = Role::query()
+            ->where('role', 'Teachers')
+            ->first();
+
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
@@ -53,7 +58,7 @@ class CreateController extends LayoutsMainController
                 $pwd = rand('1000', '1000000');
                 $user->password = Hash::make($pwd);
                 $user->remember_token = $input['_token'];
-                $user->role = '3';
+                $user->role = $teacher_role->id;
                 $user->active = '1';
                 $user->save();
             } catch (ValidationException $e) {
