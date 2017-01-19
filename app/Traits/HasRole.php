@@ -8,7 +8,7 @@ trait HasRole
     public function hasRole($role)
     {
         if (is_string($role)) {
-            return ($this->getRole->role == $role) || false;
+            return in_array($role, array_pluck($this->roles->toArray(), 'role')) || false;
         }
         return false;
     }

@@ -45,7 +45,7 @@
                             <ul class="icheck-list">
                                 @foreach($core as $cor)
                                     <li>
-                                        <input name="check{{$cor->cid}}" type="checkbox" class="icheck"
+                                        <input name="check[{{$cor->cid}}]" type="checkbox" class="icheck"
                                                id="minimal-checkbox-1"
                                                value="{{$cor->cid}}" checked disabled>
                                         <label for="minimal-checkbox-1">{{$cor->subject}}</label>
@@ -62,7 +62,7 @@
                             <ul class="icheck-list">
                                 @foreach($compulsory as $comp)
                                     <li>
-                                        <input name="check{{$comp->cid}}" type="checkbox" class="icheck"
+                                        <input name="check[{{$comp->cid}}]" type="checkbox" class="icheck"
                                                id="minimal-checkbox-1"
                                                value="{{$comp->cid}}">
                                         <label for="minimal-checkbox-1">{{$comp->subject}}</label>
@@ -78,7 +78,7 @@
                             <ul class="icheck-list">
                                 @foreach($required as $req)
                                     <li>
-                                        <input name="check{{$req->cid}}" type="checkbox" class="icheck"
+                                        <input name="check[{{$req->cid}}]" type="checkbox" class="icheck"
                                                id="minimal-checkbox-1"
                                                value="{{$req->cid}}">
                                         <label for="minimal-checkbox-1">{{$req->subject}}</label>
@@ -95,7 +95,7 @@
                             <ul class="icheck-list">
                                 @foreach($elective as $elect)
                                     <li>
-                                        <input name="check{{$elect->cid}}" type="checkbox" class="icheck"
+                                        <input name="check[{{$elect->cid}}]" type="checkbox" class="icheck"
                                                id="minimal-checkbox-1"
                                                value="{{$elect->cid}}">
                                         <label for="minimal-checkbox-1">{{$elect->subject}}</label>
@@ -103,8 +103,6 @@
                                 @endforeach
                             </ul>
                         @endif
-
-
 
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-5">

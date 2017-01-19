@@ -109,7 +109,7 @@
                         <img src="{{URL::asset('assets/images/thumb-1.png')}}" width="55" alt="" class="img-circle"/>
                         <span>Welcome,</span>
                         <strong>{{Auth::user()->firstname}} {{Auth::user()->lastname}} </strong>
-                        @foreach($roles as $role)
+                        @foreach(Auth::user()->roles as $role)
                             <p class="label label-info">{{$role->role}}</p>
                         @endforeach
                     </a>
@@ -164,15 +164,12 @@
                             </li>
                         </ul>
                     </li>
-                @endif
-
-                <li class="has-sub">
-                    <a href="ui-panels.html">
-                        <i class="entypo-newspaper"></i>
-                        <span class="title">Fees</span>
-                    </a>
-                    <ul>
-                        @if(Auth::user()->hasRole('Admin'))
+                    <li class="has-sub">
+                        <a href="ui-panels.html">
+                            <i class="entypo-newspaper"></i>
+                            <span class="title">Fees</span>
+                        </a>
+                        <ul>
                             <li>
                                 <a href="{{action('Fee\CreateController@home')}}">
                                     <span class="title">Add New Fee Type</span>
@@ -189,248 +186,241 @@
                                     <span class="title">Create Fee Items</span>
                                 </a>
                             </li>
-                        @endif
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-users"></i>
-                        <span class="title">Students</span>
-                        <span class="badge badge-secondary">8</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{action('Students\CreateController@home')}}">
-                                <i class="entypo-inbox"></i>
-                                <span class="title">Admit a New Student</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Students\IndexController@home')}}">
-                                <i class="entypo-pencil"></i>
-                                <span class="title">View Students by Class</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Students\IndexController@home')}}">
-                                <i class="entypo-pencil"></i>
-                                <span class="title">View all Students</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="mailbox.html">
-                        <i class="entypo-briefcase"></i>
-                        <span class="title">Parents</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{action('Parents\CreateController@home')}}">
-                                <i class="entypo-inbox"></i>
-                                <span class="title">Add Parents</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Parents\IndexController@home')}}">
-                                <i class="entypo-pencil"></i>
-                                <span class="title">View all Parents</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="mailbox.html">
-                        <i class="entypo-mail"></i>
-                        <span class="title">Teachers</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{action('Teachers\CreateController@home')}}">
-                                <i class="entypo-inbox"></i>
-                                <span class="title">Register Teachers</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Teachers\IndexController@home')}}">
-                                <i class="entypo-pencil"></i>
-                                <span class="title">View all Teachers</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-doc-text"></i>
-                        <span class="title">Subjects</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="{{action('Subjects\CreateController@home')}}">
-                                <span class="title">Add a New Subject</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Subjects\IndexController@home')}}">
-                                <span class="title">View all Subjects</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Subjects\ClassController@home')}}">
-                                <span class="title">Add Subjects to Class</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-window"></i>
-                        <span class="title">Assignments</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <span class="title">Add Assignments</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Pending Assignments</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Submitted Assignments</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-bag"></i>
-                        <span class="title">Timetable</span>
-                        <span class="badge badge-info badge-roundless">New</span>
-                    </a>
-                    <ul>
-                        <li class="has-sub">
-                            <a href="#">
-                                <span class="title">Add Timetable</span>
-                                <span class="badge badge-success">3</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">View Timetable</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-bag"></i>
-                        <span class="title">Reports</span>
-                        <span class="badge badge-info badge-roundless">New</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <span class="title">View Academic Reports</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">View Payment Reports</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-bag"></i>
-                        <span class="title">Notifications</span>
-                        <span class="badge badge-info badge-roundless">New</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <span class="title">Add Upcoming Events</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Add School News</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Notify Parents</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-bag"></i>
-                        <span class="title">Users</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <span class="title">Create Single Users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Import Bulk Users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">View All Users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Assign Roles</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a href="#">
-                        <i class="entypo-cog"></i>
-                        <span class="title">Settings</span>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <span class="title">School Details</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Academic Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{action('Sessions\CreateController@home')}}">
-                                <span class="title">Sessions</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="title">Modules Settings</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="#">
+                            <i class="entypo-users"></i>
+                            <span class="title">Students</span>
+                            <span class="badge badge-secondary">8</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{action('Students\CreateController@home')}}">
+                                    <i class="entypo-inbox"></i>
+                                    <span class="title">Admit a New Student</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Students\IndexController@home')}}">
+                                    <i class="entypo-pencil"></i>
+                                    <span class="title">View Students by Class</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Students\IndexController@home')}}">
+                                    <i class="entypo-pencil"></i>
+                                    <span class="title">View all Students</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="mailbox.html">
+                            <i class="entypo-briefcase"></i>
+                            <span class="title">Parents</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{action('Parents\CreateController@home')}}">
+                                    <i class="entypo-inbox"></i>
+                                    <span class="title">Add Parents</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Parents\IndexController@home')}}">
+                                    <i class="entypo-pencil"></i>
+                                    <span class="title">View all Parents</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="mailbox.html">
+                            <i class="entypo-mail"></i>
+                            <span class="title">Teachers</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="mailbox.html">
+                                    <i class="entypo-inbox"></i>
+                                    <span class="title">Register Teachers</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailbox-compose.html">
+                                    <i class="entypo-pencil"></i>
+                                    <span class="title">View all Teachers</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="#">
+                            <i class="entypo-doc-text"></i>
+                            <span class="title">Subjects</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{action('Subjects\CreateController@home')}}">
+                                    <span class="title">Add a New Subject</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Subjects\IndexController@home')}}">
+                                    <span class="title">View all Subjects</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Subjects\ClassController@home')}}">
+                                    <span class="title">Add Subjects to Class</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="tables-main.html">
+                            <i class="entypo-window"></i>
+                            <span class="title">Assignments</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="tables-main.html">
+                                    <span class="title">Add Assignments</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tables-datatable.html">
+                                    <span class="title">Pending Assignments</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tables-datatable.html">
+                                    <span class="title">Submitted Assignments</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="extra-icons.html">
+                            <i class="entypo-bag"></i>
+                            <span class="title">Timetable</span>
+                            <span class="badge badge-info badge-roundless">New</span>
+                        </a>
+                        <ul>
+                            <li class="has-sub">
+                                <a href="extra-icons.html">
+                                    <span class="title">Add Timetable</span>
+                                    <span class="badge badge-success">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="extra-portlets.html">
+                                    <span class="title">View Timetable</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="extra-icons.html">
+                            <i class="entypo-bag"></i>
+                            <span class="title">Reports</span>
+                            <span class="badge badge-info badge-roundless">New</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="extra-gallery.html">
+                                    <span class="title">View Academic Reports</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="extra-gallery-single.html">
+                                    <span class="title">View Payment Reports</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="extra-icons.html">
+                            <i class="entypo-bag"></i>
+                            <span class="title">Notifications</span>
+                            <span class="badge badge-info badge-roundless">New</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="extra-gallery.html">
+                                    <span class="title">Add Upcoming Events</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="extra-gallery-single.html">
+                                    <span class="title">Add School News</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="extra-gallery-single.html">
+                                    <span class="title">Notify Parents</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="extra-icons.html">
+                            <i class="entypo-bag"></i>
+                            <span class="title">Users</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="extra-gallery.html">
+                                    <span class="title">Create Single Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="extra-gallery-single.html">
+                                    <span class="title">Import Bulk Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="extra-gallery-single.html">
+                                    <span class="title">View All Users</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="extra-gallery-single.html">
+                                    <span class="title">Assign Roles</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="#">
+                            <i class="entypo-cog"></i>
+                            <span class="title">Settings</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <span class="title">School Details</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="title">Academic Settings</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Sessions\CreateController@home')}}">
+                                    <span class="title">Sessions</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="title">Modules Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
             </ul>
 
         </div>
@@ -530,7 +520,7 @@
 											</span>
 
 											<span class="line desc small">
-												This ain’t our first item, it is the best of the rest.
+												This ainï¿½t our first item, it is the best of the rest.
 											</span>
                                         </a>
                                     </li>

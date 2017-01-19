@@ -18,13 +18,8 @@ class CreateController extends LayoutsMainController
 {
     public function home()
     {
-        $teacher_role = Role::query()
-            ->where('role', 'Teachers')
-            ->first();
-
-        $users = User::where('role', $teacher_role->id)
-            ->get();
-        return View('category.create', ['users' => $users]);
+        $teachers = Role::where('role','Teachers')->first()->users()->get();
+        return View('category.create', ['users' => $teachers]);
     }
 
 

@@ -59,10 +59,8 @@ class LayoutsMainController extends Controller
 
     protected function students()
     {
-        $studentscount = User::where('role', '4')
-            ->get()
-            ->count();
-        view()->share('studentscount', $studentscount);
+        $students = Role::where('role','Students')->first()->users()->count();
+        view()->share('studentscount', $students);
     }
 
     protected function session()
