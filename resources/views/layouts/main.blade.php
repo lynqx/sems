@@ -664,14 +664,13 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="well">
-                    <h4><?php echo date("M  j") . ', ' . date("Y"); ?> || <span id="clockspa"></span></h4>
+                    <small><?php echo date("M  j") . ', ' . date("Y"); ?> || <span id="clockspa"></span></small>
                     <h4>Welcome to<strong> Lynqx Group of Schools</strong></h4>
-
-                    <p class="label label-info" style="font-size:11px">ACADEMIC SESSION:
-                        @foreach($sessions as $session)
-                            {{$session->session}}
-                        @endforeach
-                    </p>
+                    @if(empty($session))
+                        <span class="badge badge-danger badge-roundless">NO SESSION</span>
+                    @else
+                        <span class="badge badge-info badge-roundless">ACADEMIC SESSION: {{$session->session}}</span>
+                    @endif
                 </div>
             </div>
         </div>

@@ -65,9 +65,9 @@ class LayoutsMainController extends Controller
 
     protected function session()
     {
-        $sessions = Session::where('status', '1')
-            ->get();
-        view()->share('sessions', $sessions);
+        $session = Session::where('status', '1')
+            ->get()->first();
+        view()->share(compact('session'));
     }
 
 
