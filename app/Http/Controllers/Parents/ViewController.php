@@ -23,17 +23,37 @@ class ViewController extends LayoutsMainController
             ->where('users.id', $slug)
             ->limit('1')
             ->get();
+
         foreach ($users as $user) {
             $parent = $user['uid'];
         }
-        $students = ParentStudent::select('*', 'users.firstname as fname', 'users.lastname as lname')
+
+        $students = ParentStudent::select('*', 'users.firstname as fname', 'users.lastname as lname', 'genders.gender as sex',
+            'categories.category as class')
             ->leftjoin('users', 'parent_student.student', '=', 'users.id')
-            ->leftjoin('user_biodata', 'parent_student.student', '=', 'user_biodata.user_id')
-            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
+            ->leftjoin('student_biodata', 'parent_student.student', '=', 'student_biodata.user_id')
+            ->leftjoin('genders', 'student_biodata.gender', '=', 'genders.id')
+            ->leftjoin('student_class', 'parent_student.student', '=', 'student_class.user_id')
+            ->leftjoin('categories', 'student_class.categories_id', '=', 'categories.cat_id')
             ->where('parent_student.parent', $parent)
             ->get();
 
-        return View('parents.view', ['users' => $users, 'students' => $students]);
+        if (isset($students) && $students != "") {
+            foreach ($students as $student) {
+                $teacher = $student['teacher'];
+            }
+        } else {
+            return Redirect::to('parents');
+        }
+
+        $teachers = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname',
+            'user_biodata.mobile as phone')
+            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
+            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
+            ->where('users.id', $teacher)
+            ->get();
+
+        return View('parents.view', ['users' => $users, 'students' => $students, 'teachers' => $teachers ]);
     }
 
 

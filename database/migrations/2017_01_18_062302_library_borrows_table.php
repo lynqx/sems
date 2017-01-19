@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersRolesTable extends Migration
+class LibraryBorrowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateUsersRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_roles', function (Blueprint $table) {
+        Schema::create('library_borrows', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('role_id');
+            $table->string('user');
+            $table->string('status');
+            $table->string('date_return');
             $table->timestamps();
         });
     }
@@ -28,6 +29,7 @@ class CreateUsersRolesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users_roles');
+        Schema::dropIfExists('library_borrows');
+
     }
 }

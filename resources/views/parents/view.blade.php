@@ -94,12 +94,16 @@
                                             @foreach($students as $student)
                                                 <table class="table table-hover table-striped">
                                                     <tr><td class="text-right"><i class="entypo-users"></i>Name of Child :</td><td> {{$student->fname}} {{$student->middlename}} {{$student->lname}}</td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-menu"></i>Class :</td><td> {{$student->fname}} </td></tr>
+                                                    <tr><td class="text-right"><i class="entypo-menu"></i>Class :</td><td> {{$student->class}} </td></tr>
                                                     <tr><td class="text-right"><i class="entypo-phone"></i>Mobile :</td><td> {{$student->mobile}} </td></tr>
                                                     <tr><td class="text-right"><i class="entypo-mail"></i>Email :</td><td> {{$student->email}} </td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-user"></i> Gender :</td><td> {{$student->gender}} </td></tr>
+                                                    <tr><td class="text-right"><i class="entypo-user"></i> Gender :</td><td> {{$student->sex}} </td></tr>
                                                     <tr><td class="text-right"><i class="entypo-calendar"></i>Date of Birth :</td><td> {{$student->dob}} </td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-user"></i>Class Teacher :</td><td> {{$student->fname}} </td></tr>
+
+                                                    @foreach($teachers as $teacher)
+                                                    <tr><td class="text-right"><i class="entypo-user"></i>Class Teacher :</td><td> {{$teacher->fname}} {{$teacher->lname}}
+                                                        <p class="label label-info">{{$teacher->gender}}</p></td></tr>
+                                                        @endforeach
                                                 </table>
                                                 @endforeach
                                         </div>

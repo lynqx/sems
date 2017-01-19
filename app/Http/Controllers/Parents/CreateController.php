@@ -12,6 +12,7 @@ use App\Models\ParentStudent;
 use App\Models\Role;
 use App\Models\Sms;
 use App\Models\User;
+use App\Models\UsersRole;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
@@ -40,6 +41,10 @@ class CreateController extends LayoutsMainController
 
     public function saveCreate()
     {
+        $parent_role = Role::query()
+            ->where('role', 'Parents')
+            ->first();
+
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
@@ -81,6 +86,25 @@ class CreateController extends LayoutsMainController
                 DB::rollback();
                 throw $e;
             }
+
+            try {
+                $insertedId = $user->id;
+                $userrole = new UsersRole;
+                $userrole->user_id = $insertedId;
+                $userrole->role_id = $parent_role->id;
+                $userrole->save();
+            } catch (ValidationException $e) {
+                // Rollback and then redirect
+                // back to form with errors
+                DB::rollback();
+                return Redirect::to('parents/create')
+                    ->withErrors($e->getErrors())
+                    ->withInput();
+            } catch (\Exception $e) {
+                DB::rollback();
+                throw $e;
+            }
+
 
             try {
                 $insertedId = $user->id;

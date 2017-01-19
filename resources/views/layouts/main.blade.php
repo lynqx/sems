@@ -140,7 +140,7 @@
                 <!-- add class "multiple-expanded" to allow multiple submenus to open -->
                 <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
                 <li class="opened active">
-                    <a href="index.html">
+                    <a href="/">
                         <i class="entypo-gauge"></i>
                         <span class="title">Dashboard</span>
                     </a>
@@ -324,8 +324,26 @@
                     <li class="has-sub">
                         <a href="extra-icons.html">
                             <i class="entypo-bag"></i>
-                            <span class="title">Reports</span>
+                            <span class="title">Library</span>
                             <span class="badge badge-info badge-roundless">New</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{action('Library\CreateController@home')}}">
+                                    <span class="title">Add New Books</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Library\IndexController@home')}}">
+                                    <span class="title">View All Books</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="extra-icons.html">
+                            <i class="entypo-bag"></i>
+                            <span class="title">Reports</span>
                         </a>
                         <ul>
                             <li>
@@ -340,11 +358,11 @@
                             </li>
                         </ul>
                     </li>
+
                     <li class="has-sub">
                         <a href="extra-icons.html">
                             <i class="entypo-bag"></i>
                             <span class="title">Notifications</span>
-                            <span class="badge badge-info badge-roundless">New</span>
                         </a>
                         <ul>
                             <li>

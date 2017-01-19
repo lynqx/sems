@@ -21,8 +21,7 @@ class SubjectController extends LayoutsMainController
     {
         $users = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role',
             'categories.category as class','categories.cat_id as c_id', 'categories.teacher as teacher')
-            ->leftjoin('users_roles', 'users.id', '=', 'users_roles.user_id')
-            ->leftjoin('roles', 'users_roles.role_id', '=', 'roles.id')
+            ->leftjoin('roles', 'users.role', '=', 'roles.id')
             ->leftjoin('student_class', 'users.id', '=', 'student_class.user_id')
             ->leftjoin('categories', 'student_class.categories_id', '=', 'categories.cat_id')
             ->where('users.id', $slug)
@@ -61,7 +60,6 @@ class SubjectController extends LayoutsMainController
         $sms->recipient = Input::get('mobile');
         $sms->message = "Dear " . Input::get('firstname') . ", we have just created an account for you on our students portal";
         event(new SmsEvent($sms));*/
-        
         $student_role = Role::query()
             ->where('role', 'Students')
             ->first();
