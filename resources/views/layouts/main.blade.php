@@ -324,8 +324,26 @@
                     <li class="has-sub">
                         <a href="extra-icons.html">
                             <i class="entypo-bag"></i>
-                            <span class="title">Reports</span>
+                            <span class="title">Library</span>
                             <span class="badge badge-info badge-roundless">New</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="{{action('Library\CreateController@home')}}">
+                                    <span class="title">Add New Books</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{action('Library\IndexController@home')}}">
+                                    <span class="title">View All Books</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub">
+                        <a href="extra-icons.html">
+                            <i class="entypo-bag"></i>
+                            <span class="title">Reports</span>
                         </a>
                         <ul>
                             <li>
@@ -340,11 +358,11 @@
                             </li>
                         </ul>
                     </li>
+
                     <li class="has-sub">
                         <a href="extra-icons.html">
                             <i class="entypo-bag"></i>
                             <span class="title">Notifications</span>
-                            <span class="badge badge-info badge-roundless">New</span>
                         </a>
                         <ul>
                             <li>
