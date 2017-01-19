@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Biodata extends Model
 {
-    protected $table = 'user_biodata';
-
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class, 'gender');
+    }
 }

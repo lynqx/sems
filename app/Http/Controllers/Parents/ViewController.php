@@ -16,44 +16,9 @@ class ViewController extends LayoutsMainController
 {
     public function home($slug)
     {
-        $users = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role')
-            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
-            ->leftjoin('roles', 'users.role', '=', 'roles.id')
-            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
-            ->where('users.id', $slug)
-            ->limit('1')
-            ->get();
-
-        foreach ($users as $user) {
-            $parent = $user['uid'];
-        }
-
-        $students = ParentStudent::select('*', 'users.firstname as fname', 'users.lastname as lname', 'genders.gender as sex',
-            'categories.category as class')
-            ->leftjoin('users', 'parent_student.student', '=', 'users.id')
-            ->leftjoin('student_biodata', 'parent_student.student', '=', 'student_biodata.user_id')
-            ->leftjoin('genders', 'student_biodata.gender', '=', 'genders.id')
-            ->leftjoin('student_class', 'parent_student.student', '=', 'student_class.user_id')
-            ->leftjoin('categories', 'student_class.categories_id', '=', 'categories.cat_id')
-            ->where('parent_student.parent', $parent)
-            ->get();
-
-        if (isset($students) && $students != "") {
-            foreach ($students as $student) {
-                $teacher = $student['teacher'];
-            }
-        } else {
-            return Redirect::to('parents');
-        }
-
-        $teachers = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname',
-            'user_biodata.mobile as phone')
-            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
-            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
-            ->where('users.id', $teacher)
-            ->get();
-
-        return View('parents.view', ['users' => $users, 'students' => $students, 'teachers' => $teachers ]);
+        $parent = User::find($slug);
+        $children = $parent->children()->get();
+        return View('parents.view', compact('parent', 'children'));
     }
 
 

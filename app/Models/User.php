@@ -53,4 +53,19 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'users_roles');
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(User::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(User::class, 'parent_id');
+    }
+
+    public function biodata()
+    {
+        return $this->hasOne(Biodata::class,'user_id');
+    }
+
 }

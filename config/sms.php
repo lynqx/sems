@@ -52,4 +52,15 @@ return [
 
     'password' => env('SMS_PASSWORD'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | SMS Status
+    |--------------------------------------------------------------------------
+    |
+    | Determine whether sms should be sent or not
+    |
+    */
+
+    'status' => env('SMS_STATUS'),
+
 ];

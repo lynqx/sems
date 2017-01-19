@@ -6,10 +6,8 @@
  * Time: 4:09 AM
  */
 ?>
-@foreach($users as $user)
-    @extends('layouts.main', ['page_title'=>$user->fname." ". $user->middlename." ". $user->lname])
+@extends('layouts.main', ['page_title'=>$parent->firstname." ". $parent->middlename." ". $parent->lastname])
 @section('content')
-
 
     <div class="row">
 
@@ -20,8 +18,8 @@
             <div class="panel minimal minimal-gray">
 
                 <div class="panel-heading">
-                    <div class="panel-title"><h3>{{$user->fname}} {{$user->middlename}} {{$user->lname}}</h3>
-                        @endforeach
+                    <div class="panel-title">
+                        <h3>{{$parent->firstname}} {{$parent->middlename}} {{$parent->lastname}}</h3>
                     </div>
                     <div class="panel-options">
 
@@ -91,21 +89,38 @@
                                         </div>
 
                                         <div class="panel-body">
-                                            @foreach($students as $student)
+                                            @foreach($children as $child)
                                                 <table class="table table-hover table-striped">
-                                                    <tr><td class="text-right"><i class="entypo-users"></i>Name of Child :</td><td> {{$student->fname}} {{$student->middlename}} {{$student->lname}}</td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-menu"></i>Class :</td><td> {{$student->class}} </td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-phone"></i>Mobile :</td><td> {{$student->mobile}} </td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-mail"></i>Email :</td><td> {{$student->email}} </td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-user"></i> Gender :</td><td> {{$student->sex}} </td></tr>
-                                                    <tr><td class="text-right"><i class="entypo-calendar"></i>Date of Birth :</td><td> {{$student->dob}} </td></tr>
-
-                                                    @foreach($teachers as $teacher)
-                                                    <tr><td class="text-right"><i class="entypo-user"></i>Class Teacher :</td><td> {{$teacher->fname}} {{$teacher->lname}}
-                                                        <p class="label label-info">{{$teacher->gender}}</p></td></tr>
-                                                        @endforeach
+                                                    <tr>
+                                                        <td class="text-right"><i class="entypo-users"></i>Name of Child
+                                                            :
+                                                        </td>
+                                                        <td> {{$child->fname}} {{$child->middlename}} {{$child->lname}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-right"><i class="entypo-menu"></i>Class :</td>
+                                                        <td> {{$child->class}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-right"><i class="entypo-phone"></i>Mobile :</td>
+                                                        <td> {{$child->biodata->mobile}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-right"><i class="entypo-mail"></i>Email :</td>
+                                                        <td> {{$child->email}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-right"><i class="entypo-user"></i> Gender :</td>
+                                                        <td> {{$child->sex}} </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-right"><i class="entypo-calendar"></i>Date of
+                                                            Birth :
+                                                        </td>
+                                                        <td> {{$child->biodata->date_of_birth}} </td>
+                                                    </tr>
                                                 </table>
-                                                @endforeach
+                                            @endforeach
                                         </div>
 
 
@@ -153,33 +168,31 @@
                         <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
                     </div>
                 </div>
-                @foreach($users as $user)
-                    <div class="panel-body">
-                        <center>
-                            <div class="lockscreen-thumb">
-                                <img src="{{URL::asset('assets/images/lockscreen-user.png')}}" width="140"
-                                     class="img-circle"/>
+                <div class="panel-body">
+                    <center>
+                        <div class="lockscreen-thumb">
+                            <img src="{{URL::asset('assets/images/lockscreen-user.png')}}" width="140"
+                                 class="img-circle"/>
 
-                            </div>
-                            <h3>{{$user->fname}} {{$user->middlename}} {{$user->lname}}</h3>
-                            <hr>
-                            <p class="btn btn-info">{{$user->gender}}</p>
+                        </div>
+                        <h3>{{$parent->firstname}} {{$parent->middlename}} {{$parent->lastname}}</h3>
+                        <hr>
+                        <p class="btn btn-info">{{$parent->biodata->gender}}</p>
 
-                            <p class="btn btn-info">{{$user->dob}}</p>
-                            <hr>
-                            <h4><i class="entypo-mobile"></i> {{$user->mobile}} </h4>
-                            <hr>
-                            <h4><i class="entypo-mail"></i> </span> {{$user->email}} </h4>
-                            <hr>
-                            @endforeach
-                            @foreach($students as $student)
-                                <h4>Child's Name:<br> <i
-                                            class="entypo-users"></i> {{$student->fname}} {{$student->middlename}} {{$student->lname}}
-                                </h4>
-                            @endforeach
+                        <p class="btn btn-info">{{$parent->biodata->dob}}</p>
+                        <hr>
+                        <h4><i class="entypo-mobile"></i> {{$parent->biodata->mobile}} </h4>
+                        <hr>
+                        <h4><i class="entypo-mail"></i> </span> {{$parent->email}} </h4>
+                        <hr>
+                        @foreach($children as $child)
+                            <h4>Child's Name:<br> <i
+                                        class="entypo-users"></i> {{$child->firstname}} {{$child->middlename}} {{$child->lastname}}
+                            </h4>
+                        @endforeach
 
-                        </center>
-                    </div>
+                    </center>
+                </div>
 
             </div>
         </div>

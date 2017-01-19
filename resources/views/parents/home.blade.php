@@ -13,13 +13,13 @@
 
     <div class="row">
         <h3>View All Parents</h3>
-        <br />
+        <br/>
 
         <script type="text/javascript">
-            jQuery( document ).ready( function( $ ) {
-                var $table4 = jQuery( "#table-4" );
+            jQuery(document).ready(function ($) {
+                var $table4 = jQuery("#table-4");
 
-                $table4.DataTable( {
+                $table4.DataTable({
                     dom: 'Bfrtip',
                     buttons: [
                         'copyHtml5',
@@ -27,82 +27,71 @@
                         'csvHtml5',
                         'pdfHtml5'
                     ]
-                } );
-            } );
+                });
+            });
         </script>
 
-        @if ($users->isEmpty())
+        @if ($parents->isEmpty())
             <div class="panel-body">
                 <p> No parents has been added for your school </p>
             </div>
 
         @else
-        <table class="table table-bordered datatable" id="table-4">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Gender</th>
-                <th>Operations</th>
-            </tr>
-            </thead>
+            <table class="table table-bordered datatable" id="table-4">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Gender</th>
+                    <th>Operations</th>
+                </tr>
+                </thead>
 
-            <tbody>
-            @foreach($users as $user)
-            <tr class="odd gradeX">
-                <td>{{$user->uid}}</td>
-                <td>{{$user->fname}} {{$user->middlename}} {{$user->lname}}</td>
-                <td>{{$user->email}}</td>
-                <td>+234(0){{$user->mobile}}</td>
-                <td>{{$user->gender}}</td>
-                <td>
-                    <div class="btn-group left-dropdown">
-                        <button type="button" class="btn btn-danger">Actions</button>
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
+                <tbody>
+                @foreach($parents as $parent)
+                    <tr class="odd gradeX">
+                        <td>{{$parent->id}}</td>
+                        <td>{{$parent->firstname}} {{$parent->middlename}} {{$parent->lastname}}</td>
+                        <td>{{$parent->email}}</td>
+                        <td>+234(0){{isset($parent->biodata) ? $parent->biodata->mobile :''}}</td>
+                        <td>{{isset($parent->biodata) ? $parent->biodata->gender : 'not set'}}</td>
+                        <td>
+                            <div class="btn-group left-dropdown">
+                                <button type="button" class="btn btn-danger">Actions</button>
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
 
-                        <ul class="dropdown-menu dropdown-info" role="menu">
-                            <li><a href="{{action('Parents\ViewController@home', $user->uid) }}">View</a>
-                            </li>
-                            <li><a href="{{action('Parents\UpdateController@home', $user->uid) }}">Edit</a>
-                            </li>
-                            <li><a href="#">Deactivate</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="javascript;"
-                                   data-delete="{{$user->uid}}">
-                                    Delete
-                                </a>
+                                <ul class="dropdown-menu dropdown-info" role="menu">
+                                    <li><a href="{{action('Parents\ViewController@home', $parent->id) }}">View</a>
+                                    </li>
+                                    <li><a href="{{action('Parents\UpdateController@home', $parent->id) }}">Edit</a>
+                                    </li>
+                                    <li><a href="#">Deactivate</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="javascript;"
+                                           data-delete="{{$parent->id}}">
+                                            Delete
+                                        </a>
 
-                                <form id="delete-form-{{$user->uid}}"
-                                      action="{{ action('Parents\DeleteController@index', $user->uid) }}"
-                                      method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
+                                        <form id="delete-form-{{$parent->id}}"
+                                              action="{{ action('Parents\DeleteController@index', $parent->id) }}"
+                                              method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
 
-            @endforeach
-            </tbody>
-
-            <tfoot>
-            <tr>
-                <th>#</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Mobile</th>
-                <th>Gender</th>
-                <th>Operations</th>
-            </tr>
-            </tfoot>
-        </table>
-            @endif
+                @endforeach
+                </tbody>
+            </table>
+        @endif
 
     </div>
 
