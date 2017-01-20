@@ -7,7 +7,7 @@
  */
 ?>
 
-@extends('layouts.main', ['page_title'=>'View all Students'])
+@extends('layouts.main', ['page_title'=>'View My Children'])
 @section('content')
 
 

@@ -31,7 +31,7 @@
             } );
         </script>
 
-        @if ($users->isEmpty())
+        @if ($teachers->isEmpty())
             <div class="panel-body">
                 <p> No teachers has been added for your school </p>
             </div>
@@ -43,6 +43,7 @@
                 <th>#</th>
                 <th>Full Name</th>
                 <th>Email</th>
+                <th>Mobile</th>
                 <th>Gender</th>
                 <th>Class</th>
                 <th>Operations</th>
@@ -50,24 +51,25 @@
             </thead>
 
             <tbody>
-            @foreach($users as $user)
+            @foreach($teachers as $teacher)
             <tr class="odd gradeX">
-                <td>{{$user->uid}}</td>
-                <td>{{$user->fname}}  {{$user->lname}}</td>
-                <td>{{$user->email}}</td>
-                <td>{{$user->gender}}</td>
-                <td>{{$user->class}}</td>
-                <td><a href="{{action('Fee\UpdateController@home', $user->uid) }}"
+                <td>{{$teacher->id}}</td>
+                <td>{{$teacher->firstname}} {{$teacher->middlename}} {{$teacher->lastname}}</td>
+                <td>{{$teacher->email}}</td>
+                <td>+234(0){{isset($teacher->biodata) ? $teacher->biodata->mobile :''}}</td>
+                <td>{{isset($teacher->biodata) ? $teacher->biodata->gender : 'not set'}}</td>
+                <td>{{$teacher->class}}</td>
+                <td><a href="{{action('Fee\UpdateController@home', $teacher->id) }}"
                        class="btn btn-success"> Edit </a>
 
                     <a href="javascript;"
                        class="btn btn-danger"
-                       data-delete="{{$user->uid}}">
+                       data-delete="{{$teacher->id}}">
                         Delete
                     </a>
 
-                    <form id="delete-form-{{$user->uid}}"
-                          action="{{ action('Fee\DeleteController@index', $user->uid) }}"
+                    <form id="delete-form-{{$teacher->id}}"
+                          action="{{ action('Fee\DeleteController@index', $teacher->id) }}"
                           method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>

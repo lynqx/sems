@@ -42,67 +42,44 @@ class CreateController extends LayoutsMainController
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             return Redirect::to('teachers/create')->with('errors', $validator->messages());
-
-        } else {
-
-            // Start transaction!
-            DB::beginTransaction();
-
-            try {
-                $user = new User;
-                $input = Input::all();
-                $user->firstname = $input['firstname'];
-                $user->middlename = $input['middlename'];
-                $user->lastname = $input['lastname'];
-                $user->email = $input['email'];
-                $pwd = rand('1000', '1000000');
-                $user->password = Hash::make($pwd);
-                $user->remember_token = $input['_token'];
-                $user->role = $teacher_role->id;
-                $user->active = '1';
-                $user->save();
-            } catch (ValidationException $e) {
-                // Rollback and then redirect
-                // back to form with errors
-                DB::rollback();
-                return Redirect::to('teachers/create')
-                    ->withErrors($e->getErrors())
-                    ->withInput();
-            } catch (\Exception $e) {
-                DB::rollback();
-                throw $e;
-            }
-
-            try {
-                $insertedId = $user->id;
-                $biodata = new Biodata;
-
-                $biodata->user_id = $insertedId;
-                $biodata->gender = $input['gender'];
-                $biodata->m_status = $input['m_status'];
-                $biodata->dob = $input['dob'];
-                $biodata->mobile = $input['mobile'];
-                $biodata->address = $input['address'];;
-                $biodata->save();
-            } catch (ValidationException $e) {
-                // Rollback and then redirect
-                // back to form with errors
-                DB::rollback();
-                return Redirect::to('teachers/create')
-                    ->withErrors($e->getErrors())
-                    ->withInput();
-            } catch (\Exception $e) {
-                DB::rollback();
-                throw $e;
-            }
-
-// If we reach here, then
-// data is valid and working.
-// Commit the queries!
-            DB::commit();
-
-            return Redirect::action('Teachers\IndexController@home')->with('message', 'Teacher created successfully!');
-
         }
+
+        $input = Input::all();
+        DB::beginTransaction();
+        try {
+            $user = new User;
+            $user->firstname = $input['firstname'];
+            $user->middlename = $input['middlename'];
+            $user->lastname = $input['lastname'];
+            $user->email = $input['email'];
+            $pwd = rand('1000', '1000000');
+            $user->password = Hash::make($pwd);
+            $user->remember_token = $input['_token'];
+            $user->active = '1';
+            $user->save();
+            $user->roles()->attach($teacher_role->id);
+
+            $biodata = new Biodata;
+            $biodata->user_id = $user->id;
+            $biodata->gender = $input['gender'];
+            $biodata->marital_status = $input['m_status'];
+            $biodata->date_of_birth = $input['dob'];
+            $biodata->mobile = $input['mobile'];
+            $biodata->address = $input['address'];
+            $biodata->save();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        if (config('sms.status')) {
+            $sms = new Sms();
+            $sms->recipient = Input::get('mobile');
+            $sms->message = "Dear " . Input::get('firstname') . ", we have just created an account for you on the school portal";
+            $sms->message .="Your password is ".$pwd;
+            event(new SmsEvent($sms));
+        }
+        DB::commit();
+        return Redirect::action('Teachers\IndexController@home')->with('message', 'Parent successfully added!');
+
     }
 }
