@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
             ->where('role', 'Teachers')
             ->first();
         $biodata = new Biodata();
-        $biodata->gender = 1;
+        $biodata->gender_id = 1;
         $biodata->marital_status = 1;
         $biodata->mobile = '08067335486';
         User::query()->delete();
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
         $admin_user->save();
 
         $biodata = new Biodata();
-        $biodata->gender = 1;
+        $biodata->gender_id = 1;
         $biodata->marital_status = 1;
         $biodata->mobile = '08067335486';
         $parent_user = User::create(array('firstname' => 'Parent', 'middlename' => 'Parent', 'lastname' => 'Parent',
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
         $parent_user->save();
 
         $biodata = new Biodata();
-        $biodata->gender = 1;
+        $biodata->gender_id = 1;
         $biodata->marital_status = 1;
         $biodata->mobile = '08067335486';
         $teacher_user = User::create(array('firstname' => 'Teacher', 'middlename' => 'Teacher', 'lastname' => 'Teacher',
@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
         $teacher_user->save();
 
         $biodata = new Biodata();
-        $biodata->gender = 1;
+        $biodata->gender_id = 1;
         $biodata->marital_status = 1;
         $biodata->mobile = '08067335486';
         $student_user = User::create(array('firstname' => 'Student', 'middlename' => 'Student', 'lastname' => 'Student',

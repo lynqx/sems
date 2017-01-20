@@ -16,69 +16,39 @@ class ViewController extends LayoutsMainController
 {
     public function home($slug)
     {
-        $users = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role',
-            'categories.category as class', 'categories.teacher as teacher', 'student_biodata.gender as sex')
-            ->leftjoin('student_biodata', 'users.id', '=', 'student_biodata.user_id')
-            ->leftjoin('user_contact', 'users.id', '=', 'user_contact.user_id')
-            ->leftjoin('users_roles', 'users.id', '=', 'users_roles.user_id')
-            ->leftjoin('roles', 'users_roles.role_id', '=', 'roles.id')
-            ->leftjoin('genders', 'student_biodata.gender', '=', 'genders.id')
-            ->leftjoin('student_class', 'users.id', '=', 'student_class.user_id')
-            ->leftjoin('parent_student', 'users.id', '=', 'parent_student.student')
-            ->leftjoin('categories', 'student_class.categories_id', '=', 'categories.cat_id')
-            ->leftjoin('fee_lists', 'categories.cat_id', '=', 'fee_lists.categories')
-            ->leftjoin('fee_types', 'fee_lists.fee_types', '=', 'fee_types.id')
-            ->where('users.id', $slug)
-            ->limit('1')
-            ->get();
+        $user = User::find($slug);
 
-//        $selected = $users['sex'];
+        $fees = [];
+//        FeeList::select('*', 'fee_types.name as fee_type')
+//            ->leftjoin('fee_types', 'fee_lists.fee_types', '=', 'fee_types.id')
+//            ->where('fee_lists.categories', $category)
+//            ->get();
 
-        if (isset($users) && $users != "") {
-            foreach ($users as $user) {
-                $category = $user['cat_id'];
-                $teacher = $user['teacher'];
-                $parent = $user['parent'];
-            }
-        } else {
-            return Redirect::to('students');
-        }
+        $totals = [];
+//        DB::table('fee_lists as s1')
+//            ->select(DB::raw('sum(s1.amount) as totalamount'
+//            ))
+//            ->where('s1.categories', $category)
+//            ->get();
 
-        $fees = FeeList::select('*', 'fee_types.name as fee_type')
-            ->leftjoin('fee_types', 'fee_lists.fee_types', '=', 'fee_types.id')
-            ->where('fee_lists.categories', $category)
-            ->get();
+        $teachers = [];
+//        User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname',
+//            'user_biodata.mobile as phone')
+//            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
+//            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
+//            ->where('users.id', $teacher)
+//            ->get();
 
-        $totals = DB::table('fee_lists as s1')
-            ->select(DB::raw('sum(s1.amount) as totalamount'
-            ))
-            ->where('s1.categories', $category)
-            ->get();
-
-        $teachers = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname',
-            'user_biodata.mobile as phone')
-            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
-            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
-            ->where('users.id', $teacher)
-            ->get();
-
-        $parents = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname',
-            'user_biodata.mobile as phone')
-            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
-            ->leftjoin('user_contact', 'users.id', '=', 'user_contact.user_id')
-            ->where('users.id', $parent)
-            ->get();
-
-        $subjects = StudentSubject::select('*')
-            ->leftjoin('courses', 'student_subject.subject', '=', 'courses.id')
-            ->where('student_subject.student', $slug)
-            ->get();
-
+        $subjects = [];
+//        StudentSubject::select('*')
+//            ->leftjoin('courses', 'student_subject.subject', '=', 'courses.id')
+//            ->where('student_subject.student', $slug)
+//            ->get();
+        $sessions = array();
         $genders = Gender::all();
         $status = Status::all();
 
-        return View('students.view', ['users' => $users, 'fees' => $fees, 'totals' => $totals, 'teachers' => $teachers, 'subjects' => $subjects, 'genders' => $genders, 'status' => $status,
-            'parents' => $parents]);
+        return View('students.view', compact('user', 'fees', 'totals', 'teachers', 'subjects', 'genders', 'sessions', 'status'));
     }
 
 

@@ -8,7 +8,7 @@ class GendersTableSeeder extends Seeder
     public function run()
     {
         Gender::query()->delete();
-        Gender::create(array('gender' => 'Male'));
-        Gender::create(array('gender' => 'Female'));
+        Gender::create(array('name' => 'Male'));
+        Gender::create(array('name' => 'Female'));
     }
 }

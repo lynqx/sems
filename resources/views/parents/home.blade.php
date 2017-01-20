@@ -56,7 +56,7 @@
                         <td>{{$parent->firstname}} {{$parent->middlename}} {{$parent->lastname}}</td>
                         <td>{{$parent->email}}</td>
                         <td>+234(0){{isset($parent->biodata) ? $parent->biodata->mobile :''}}</td>
-                        <td>{{isset($parent->biodata) ? $parent->biodata->gender : 'not set'}}</td>
+                        <td>{{isset($parent->biodata) && isset($parent->biodata->gender) ? $parent->biodata->gender->name : 'not set'}}</td>
                         <td>
                             <div class="btn-group left-dropdown">
                                 <button type="button" class="btn btn-danger">Actions</button>
