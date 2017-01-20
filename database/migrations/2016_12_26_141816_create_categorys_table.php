@@ -15,10 +15,10 @@ class CreateCategorysTable extends Migration
     {
         //
         Schema::create('categories', function (Blueprint $table) {
-            $table->increments('cat_id');
-            $table->string('category');
-            $table->string('teacher');
-            $table->boolean('status');
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('teacher_id');
+            $table->boolean('status')->default('1');
             $table->timestamps();
         });
     }

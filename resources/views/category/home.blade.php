@@ -30,7 +30,7 @@
                 } );
             } );
         </script>
-            @if ($categorys->isEmpty())
+            @if (empty($categories))
                 <div class="panel-body">
                     <p> No classes has been added for your school </p>
                 </div>
@@ -40,20 +40,20 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Categories</th>
-                        <th>Teachers</th>
+                        <th>Name</th>
+                        <th>Teacher</th>
                         <th>Status</th>
                         <th>Date Added</th>
-                        <th>Operations</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    @foreach($categorys as $category)
+                    @foreach($categories as $category)
                         <tr>
-                            <td>{{$category->categories_id}}</td>
-                            <td>{{$category->category}}</td>
-                            <td>{{$category->fname}}  {{$category->lname}}</td>
+                            <td>{{$category->id}}</td>
+                            <td>{{$category->name}}</td>
+                            <td>{{$category->teacher->firstname}}  {{$category->teacher->lastname}}</td>
                             <td>
                                 @if($category->status == 1)
                                     <p class="btn btn-info">Active</p>
@@ -62,17 +62,17 @@
                                 @endif
                             </td>
                             <td>{{$category->created_at}}</td>
-                            <td><a href="{{action('Category\UpdateController@home', $category->categories_id) }}"
+                            <td><a href="{{action('Category\UpdateController@home', $category->id) }}"
                                    class="btn btn-success"> Edit </a>
 
                                 <a href="javascript;"
                                    class="btn btn-danger"
-                                   data-delete="{{$category->categories_id}}">
+                                   data-delete="{{$category->id}}">
                                     Delete
                                 </a>
 
-                                <form id="delete-form-{{$category->categories_id}}"
-                                      action="{{ action('Category\DeleteController@index', $category->categories_id) }}"
+                                <form id="delete-form-{{$category->id}}"
+                                      action="{{ action('Category\DeleteController@index', $category->id) }}"
                                       method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
