@@ -16,7 +16,7 @@ class BiodataTable extends Migration
         Schema::create('biodatas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable();
-            $table->integer('gender')->nullable();
+            $table->integer('gender_id')->nullable();
             $table->integer('marital_status')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->bigInteger('mobile')->nullable();

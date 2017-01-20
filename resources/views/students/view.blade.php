@@ -6,8 +6,7 @@
  * Time: 4:09 AM
  */
 ?>
-@foreach($users as $user)
-    @extends('layouts.main', ['page_title'=>$user->fname." ". $user->middlename." ". $user->lname])
+@extends('layouts.main', ['page_title'=>$user->firstname." ". $user->middlename." ". $user->lastname])
 @section('content')
 
 
@@ -20,8 +19,8 @@
             <div class="panel minimal minimal-gray">
 
                 <div class="panel-heading">
-                    <div class="panel-title"><h3>{{$user->fname}} {{$user->middlename}} {{$user->lname}}</h3>
-                        @endforeach
+                    <div class="panel-title">
+                        <h3>{{$user->firstname}} {{$user->middlename}} {{$user->lastname}}</h3>
                     </div>
                     <div class="panel-options">
 
@@ -54,214 +53,213 @@
                                         <div class="tab-pane active" id="v-home">
                                             <form role="form" class="form-horizontal form-groups-bordered"
                                                   action="/students/edit" method="post">
-                                                @foreach($users as $user)
 
-                                                    <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="field-2"
+                                                           class="col-sm-2 control-label">Session</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            @foreach($sessions as $session)
+                                                                <input type="text" name="joindate"
+                                                                       class="form-control" id=""
+                                                                       placeholder="Session"
+                                                                       value="{{$session->session}}" required
+                                                                       readonly>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                    <label for="field-2" class="col-sm-2 control-label">Joining
+                                                        Date</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            <input type="text" name="joindate" class="form-control"
+                                                                   id="" placeholder="Joining Date"
+                                                                   value="{{$user->created_at}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="field-2" class="col-sm-2 control-label">Reg
+                                                        Number</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            <input type="text" name="reg_number"
+                                                                   class="form-control" id=""
+                                                                   placeholder="Registration Number"
+                                                                   value="{{$user->reg_num}}" required readonly>
+                                                        </div>
+                                                    </div>
+
+                                                    <label for="field-2"
+                                                           class="col-sm-2 control-label">Class</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            <input type="text" name="class" class="form-control"
+                                                                   id="" placeholder="Class"
+                                                                   value="{{$user->class}}" required readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="field-2" class="col-sm-2 control-label">First
+                                                        Name</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            <input type="text" name="firstname" class="form-control"
+                                                                   id="" placeholder="First Name"
+                                                                   value="{{$user->firstname}}" required>
+                                                        </div>
+                                                    </div>
+                                                    <label for="field-2" class="col-sm-2 control-label">Middle
+                                                        Name</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            <input type="text" name="middlename"
+                                                                   class="form-control" id=""
+                                                                   placeholder="Middle Name"
+                                                                   value="{{$user->middlename}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="field-2" class="col-sm-2 control-label">Last
+                                                        Name</label>
+
+                                                    <div class="col-sm-10">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-users"></i>
+                                                            </div>
+                                                            <input type="text" name="lastname" class="form-control"
+                                                                   id="" placeholder="Last Name"
+                                                                   value="{{$user->lastname}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="field-2"
+                                                           class="col-sm-2 control-label">Email</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-mail"></i>
+                                                            </div>
+                                                            <input type="email" name="email" class="form-control"
+                                                                   id="" placeholder="Email Address"
+                                                                   value="{{$user->email}}">
+                                                        </div>
+                                                    </div>
+                                                    <label for="field-2" class="col-sm-2 control-label">Mobile
+                                                        Number</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-phone"></i>
+                                                            </div>
+                                                            <input type="tel" name="mobile" class="form-control"
+                                                                   id="" placeholder="Mobile Number"
+                                                                   value="{{$user->mobile}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @if (empty($genders))
+                                                        <div class="panel-body">
+                                                            <p> No Genders available </p>
+                                                        </div>
+                                                    @else
                                                         <label for="field-2"
-                                                               class="col-sm-2 control-label">Session</label>
+                                                               class="col-sm-2 control-label">Gender</label>
 
                                                         <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                @foreach($sessions as $session)
-                                                                    <input type="text" name="joindate"
-                                                                           class="form-control" id=""
-                                                                           placeholder="Session"
-                                                                           value="{{$session->session}}" required
-                                                                           readonly>
+                                                            <select name="gender" class="select2"
+                                                                    data-allow-clear="true"
+                                                                    data-placeholder="Select a Gender..." required>
+                                                                <option></option>
+                                                                @foreach($genders as $gender)
+                                                                    <option value="{{$gender->id}}">{{$gender->gender}}</option>
                                                                 @endforeach
-                                                            </div>
+                                                            </select>
+
                                                         </div>
-                                                        <label for="field-2" class="col-sm-2 control-label">Joining
-                                                            Date</label>
+                                                    @endif
+
+                                                    @if (empty($status))
+                                                        <div class="panel-body">
+                                                            <p> No Marital Status available </p>
+                                                        </div>
+                                                    @else
+                                                        <label for="field-2" class="col-sm-2 control-label">Marital
+                                                            Status</label>
 
                                                         <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                <input type="text" name="joindate" class="form-control"
-                                                                       id="" placeholder="Joining Date"
-                                                                       value="{{$user->created_at}}" required>
+                                                            <select name="m_status" class="select2"
+                                                                    data-allow-clear="true"
+                                                                    data-placeholder="Select a Status..." required>
+                                                                <option></option>
+                                                                @foreach($status as $mstat)
+                                                                    <option value="{{$mstat->id}}">{{$mstat->status}}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                        </div>
+                                                    @endif
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Date of Birth</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control datepicker"
+                                                                   data-start-view="2" name="dob"
+                                                                   value="{{$user->dob}}">
+
+                                                            <div class="input-group-addon">
+                                                                <a href="#"><i class="entypo-calendar"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="field-2" class="col-sm-2 control-label">Reg
-                                                            Number</label>
+                                                </div>
 
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                <input type="text" name="reg_number"
-                                                                       class="form-control" id=""
-                                                                       placeholder="Registration Number"
-                                                                       value="{{$user->reg_num}}" required readonly>
-                                                            </div>
-                                                        </div>
-
-                                                        <label for="field-2"
-                                                               class="col-sm-2 control-label">Class</label>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                <input type="text" name="class" class="form-control"
-                                                                       id="" placeholder="Class"
-                                                                       value="{{$user->class}}" required readonly>
-                                                            </div>
-                                                        </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-3 col-sm-5">
+                                                        <button type="submit" class="btn btn-info">Update Record
+                                                        </button>
+                                                        <input type="hidden" name="_token"
+                                                               value="{{ csrf_token() }}"/>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label for="field-2" class="col-sm-2 control-label">First
-                                                            Name</label>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                <input type="text" name="firstname" class="form-control"
-                                                                       id="" placeholder="First Name"
-                                                                       value="{{$user->fname}}" required>
-                                                            </div>
-                                                        </div>
-                                                        <label for="field-2" class="col-sm-2 control-label">Middle
-                                                            Name</label>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                <input type="text" name="middlename"
-                                                                       class="form-control" id=""
-                                                                       placeholder="Middle Name"
-                                                                       value="{{$user->middlename}}" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="field-2" class="col-sm-2 control-label">Last
-                                                            Name</label>
-
-                                                        <div class="col-sm-10">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-users"></i>
-                                                                </div>
-                                                                <input type="text" name="lastname" class="form-control"
-                                                                       id="" placeholder="Last Name"
-                                                                       value="{{$user->lname}}" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="field-2"
-                                                               class="col-sm-2 control-label">Email</label>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-mail"></i>
-                                                                </div>
-                                                                <input type="email" name="email" class="form-control"
-                                                                       id="" placeholder="Email Address"
-                                                                       value="{{$user->email}}">
-                                                            </div>
-                                                        </div>
-                                                        <label for="field-2" class="col-sm-2 control-label">Mobile
-                                                            Number</label>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-phone"></i>
-                                                                </div>
-                                                                <input type="tel" name="mobile" class="form-control"
-                                                                       id="" placeholder="Mobile Number"
-                                                                       value="{{$user->mobile}}" required>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        @if ($genders->isEmpty())
-                                                            <div class="panel-body">
-                                                                <p> No Genders available </p>
-                                                            </div>
-                                                        @else
-                                                            <label for="field-2"
-                                                                   class="col-sm-2 control-label">Gender</label>
-
-                                                            <div class="col-sm-4">
-                                                                <select name="gender" class="select2"
-                                                                        data-allow-clear="true"
-                                                                        data-placeholder="Select a Gender..." required>
-                                                                    <option></option>
-                                                                    @foreach($genders as $gender)
-                                                                        <option value="{{$gender->id}}">{{$gender->gender}}</option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                            </div>
-                                                        @endif
-
-                                                        @if ($status->isEmpty())
-                                                            <div class="panel-body">
-                                                                <p> No Marital Status available </p>
-                                                            </div>
-                                                        @else
-                                                            <label for="field-2" class="col-sm-2 control-label">Marital
-                                                                Status</label>
-
-                                                            <div class="col-sm-4">
-                                                                <select name="m_status" class="select2"
-                                                                        data-allow-clear="true"
-                                                                        data-placeholder="Select a Status..." required>
-                                                                    <option></option>
-                                                                    @foreach($status as $mstat)
-                                                                        <option value="{{$mstat->id}}">{{$mstat->status}}</option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                            </div>
-                                                        @endif
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-sm-2 control-label">Date of Birth</label>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <input type="text" class="form-control datepicker"
-                                                                       data-start-view="2" name="dob"
-                                                                       value="{{$user->dob}}">
-
-                                                                <div class="input-group-addon">
-                                                                    <a href="#"><i class="entypo-calendar"></i></a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-offset-3 col-sm-5">
-                                                            <button type="submit" class="btn btn-info">Update Record
-                                                            </button>
-                                                            <input type="hidden" name="_token"
-                                                                   value="{{ csrf_token() }}"/>
-                                                        </div>
-                                                    </div>
+                                                </div>
 
                                             </form>
 
@@ -327,12 +325,10 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        @endforeach
 
                                         <div class="tab-pane" id="v-settings">
                                             <form role="form" class="form-horizontal form-groups-bordered"
                                                   action="/students/edit" method="post">
-                                                @foreach($parents as $parent)
 
                                                     <div class="form-group">
                                                         <label for="field-2" class="col-sm-2 control-label">First
@@ -345,7 +341,7 @@
                                                                 </div>
                                                                 <input type="text" name="firstname" class="form-control"
                                                                        id="" placeholder="First Name"
-                                                                       value="{{$parent->fname}}" required>
+                                                                       value="{{$user->parent->firstname}}" required>
                                                             </div>
                                                         </div>
                                                         <label for="field-2" class="col-sm-2 control-label">Middle
@@ -359,7 +355,7 @@
                                                                 <input type="text" name="middlename"
                                                                        class="form-control" id=""
                                                                        placeholder="Middle Name"
-                                                                       value="{{$parent->middlename}}" required>
+                                                                       value="{{$user->parent->middlename}}" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -375,7 +371,7 @@
                                                                 </div>
                                                                 <input type="text" name="lastname" class="form-control"
                                                                        id="" placeholder="Last Name"
-                                                                       value="{{$parent->lname}}" required>
+                                                                       value="{{$user->parent->lastname}}" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -391,7 +387,7 @@
                                                                 </div>
                                                                 <input type="email" name="email" class="form-control"
                                                                        id="" placeholder="Email Address"
-                                                                       value="{{$parent->email}}">
+                                                                       value="{{$user->parent->email}}">
                                                             </div>
                                                         </div>
                                                         <label for="field-2" class="col-sm-2 control-label">Mobile
@@ -404,13 +400,13 @@
                                                                 </div>
                                                                 <input type="tel" name="mobile" class="form-control"
                                                                        id="" placeholder="Mobile Number"
-                                                                       value="{{$parent->mobile}}" required>
+                                                                       value="{{$user->parent->biodata->mobile}}" required>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        @if ($genders->isEmpty())
+                                                        @if (empty($genders))
                                                             <div class="panel-body">
                                                                 <p> No Genders available </p>
                                                             </div>
@@ -431,7 +427,7 @@
                                                             </div>
                                                         @endif
 
-                                                        @if ($status->isEmpty())
+                                                        @if (empty($status))
                                                             <div class="panel-body">
                                                                 <p> No Marital Status available </p>
                                                             </div>
@@ -461,7 +457,6 @@
                                                                    value="{{ csrf_token() }}"/>
                                                         </div>
                                                     </div>
-                                                @endforeach
                                             </form>
 
                                         </div>
@@ -488,7 +483,7 @@
                                         </div>
 
                                         <div class="panel-body">
-                                            @if ($fees->isEmpty())
+                                            @if (empty($fees))
                                                 <div class="panel-body">
                                                     <p> No Invoice for this students available, Please contact the
                                                         school for further details</p>
@@ -556,7 +551,7 @@
                                                         <tr>
                                                             <td colspan="2">
                                                                 <input type="hidden" name="student"
-                                                                       value="{{$user->uid}}"/>
+                                                                       value="{{$user->id}}"/>
                                                                 <button type="submit" class="btn btn-danger btn-block">
                                                                     Pay
                                                                     Invoice
@@ -584,7 +579,7 @@
                                                 <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
                                             </div>
                                         </div>
-                                        @if ($subjects->isEmpty())
+                                        @if (empty($subjects))
                                             <div class="panel-body">
                                                 <p> This student has not enrolled for any subject yet </p>
                                             </div>
@@ -615,7 +610,7 @@
                                                 <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
                                             </div>
                                         </div>
-                                        @if($teachers->isEmpty())
+                                        @if(empty($teachers))
                                             <div class="panel-body">
                                                 <p> Class Teacher not available for this student yet </p>
                                             </div>
@@ -629,8 +624,9 @@
                                                                  class="img-circle"/>
 
                                                         </div>
-                                                        <h3>{{$teacher->fname}} {{$teacher->middlename}} {{$teacher->lname}}
-                                                            <p class="label label-info" style="font-size:10px">{{$teacher->gender}}</p></h3>
+                                                        <h3>{{$teacher->firstname}} {{$teacher->middlename}} {{$teacher->lastname}}
+                                                            <p class="label label-info"
+                                                               style="font-size:10px">{{$teacher->gender}}</p></h3>
 
                                                         <h4><i class="entypo-phone"></i> {{$teacher->mobile}} </h4>
                                                         <hr>
@@ -683,32 +679,30 @@
                         <a href="#" data-rel="collapse"><i class="entypo-down-open"></i></a>
                     </div>
                 </div>
-                @foreach($users as $user)
-                    <div class="panel-body">
-                        <center>
-                            <div class="lockscreen-thumb">
-                                <img src="{{URL::asset('assets/images/lockscreen-user.png')}}" width="140"
-                                     class="img-circle"/>
+                <div class="panel-body">
+                    <center>
+                        <div class="lockscreen-thumb">
+                            <img src="{{URL::asset('assets/images/lockscreen-user.png')}}" width="140"
+                                 class="img-circle"/>
 
-                            </div>
-                            <h3>{{$user->fname}} {{$user->middlename}} {{$user->lname}}</h3>
-                            <hr>
-                            <p class="btn btn-info">{{$user->gender}}</p>
+                        </div>
+                        <h3>{{$user->firstname}} {{$user->middlename}} {{$user->lastname}}</h3>
+                        <hr>
+                        <p class="btn btn-info">{{$user->gender}}</p>
 
-                            <p class="btn btn-info">{{$user->dob}}</p>
-                            <hr>
-                            <h4><i class="entypo-mobile"></i> {{$user->mobile}} </h4>
-                            <hr>
-                            <h4><i class="entypo-mail"></i> </span> {{$user->email}} </h4>
-                            <hr>
-                            <h4><i class="entypo-folder"></i> {{$user->category}} </h4>
+                        <p class="btn btn-info">{{$user->dob}}</p>
+                        <hr>
+                        <h4><i class="entypo-mobile"></i> {{$user->biodata->mobile}} </h4>
+                        <hr>
+                        <h4><i class="entypo-mail"></i> </span> {{$user->email}} </h4>
+                        <hr>
+                        <h4><i class="entypo-folder"></i> {{$user->category}} </h4>
 
-                        </center>
-                    </div>
+                    </center>
+                </div>
 
             </div>
         </div>
-        @endforeach
 
 
     </div>

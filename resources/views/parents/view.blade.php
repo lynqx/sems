@@ -177,11 +177,11 @@
                         </div>
                         <h3>{{$parent->firstname}} {{$parent->middlename}} {{$parent->lastname}}</h3>
                         <hr>
-                        <p class="btn btn-info">{{$parent->biodata->gender}}</p>
+                        <p class="btn btn-info">{{isset($parent->biodata) && isset($parent->biodata->gender) ? $parent->biodata->gender->name : 'not set'}}</p>
 
-                        <p class="btn btn-info">{{$parent->biodata->dob}}</p>
+                        <p class="btn btn-info">{{isset($parent->biodata) ? $parent->biodata->date_of_birth : 'not set'}}</p>
                         <hr>
-                        <h4><i class="entypo-mobile"></i> {{$parent->biodata->mobile}} </h4>
+                        <h4><i class="entypo-mobile"></i> {{isset($parent->biodata) ? $parent->biodata->mobile : ''}} </h4>
                         <hr>
                         <h4><i class="entypo-mail"></i> </span> {{$parent->email}} </h4>
                         <hr>

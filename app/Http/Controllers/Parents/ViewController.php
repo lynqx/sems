@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Parents;
 
 use App\Http\Controllers\LayoutsMainController;
+use App\Models\Biodata;
 use App\Models\FeeList;
 use App\Models\ParentStudent;
 use App\Models\StudentCourse;
