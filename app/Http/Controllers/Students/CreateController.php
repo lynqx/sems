@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\LayoutsMainController;
+use App\Models\Biodata;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Gender;
@@ -63,40 +64,20 @@ class CreateController extends LayoutsMainController
                 $pwd = rand('1000', '1000000');
                 $user->password = Hash::make($pwd);
                 $user->remember_token = $input['_token'];
-                $user->role = $student_role->id;
                 $user->active = '1';
                 $user->save();
-            } catch (ValidationException $e) {
-                // Rollback and then redirect
-                // back to form with errors
-                DB::rollback();
-                return Redirect::to('students/create')
-                    ->withErrors($e->getErrors())
-                    ->withInput();
-            } catch (\Exception $e) {
-                DB::rollback();
-                throw $e;
-            }
 
-            try {
-                $insertedId = $user->id;
-                $biodata = new StudentBiodata;
+                $user->roles()->attach($student_role->id);
 
-                $biodata->user_id = $insertedId;
+                $biodata = new Biodata;
+                $biodata->user_id = $user->id;
                 $biodata->gender = $input['gender'];
-                $biodata->m_status = $input['m_status'];
-                $biodata->dob = $input['dob'];
+                $biodata->marital_status = $input['m_status'];
+                $biodata->date_of_birth = $input['dob'];
                 $biodata->mobile = $input['mobile'];
-                $biodata->address = $input['address'];;
+                $biodata->address = $input['address'];
                 $biodata->save();
-            } catch (ValidationException $e) {
-                // Rollback and then redirect
-                // back to form with errors
-                DB::rollback();
-                return Redirect::to('students/create')
-                    ->withErrors($e->getErrors())
-                    ->withInput();
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 DB::rollback();
                 throw $e;
             }
@@ -108,6 +89,7 @@ class CreateController extends LayoutsMainController
                 $studentclass->user_id = $insertedId;
                 $studentclass->categories_id = $input['category'];
                 $studentclass->save();
+
             } catch (ValidationException $e) {
                 // Rollback and then redirect
                 // back to form with errors
