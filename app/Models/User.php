@@ -68,4 +68,8 @@ class User extends Authenticatable
         return $this->hasOne(Biodata::class,'user_id');
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

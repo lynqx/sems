@@ -10,19 +10,10 @@ use App\Models\Fee;
 
 class IndexController extends LayoutsMainController
 {
-    //
     public function home()
     {
-        //$categorys = Category::with('users')->get();
-        //$categorys = Category::find(1);
-        $categorys = Category::select('*','categories.cat_id as categories_id', 'users.firstname as fname', 'users.lastname as lname')
-            ->leftjoin('users', 'categories.teacher', '=', 'users.id')
-            ->orderBy('categories_id', 'desc')
-        //->join('users', 'articles.user_id', '=', 'user.id')
-
-        ->get();
-
-        return View('category.home', compact('categorys'));
+        $categories = Category::all();
+        return View('category.home', compact('categories'));
     }
 
    /* public function home()

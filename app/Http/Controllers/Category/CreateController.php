@@ -6,6 +6,7 @@ use App\Http\Controllers\LayoutsMainController;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Category;
@@ -18,34 +19,34 @@ class CreateController extends LayoutsMainController
 {
     public function home()
     {
-        $teachers = Role::where('role','Teachers')->first()->users()->get();
-        return View('category.create', ['users' => $teachers]);
+        $teachers = Role::where('role', 'Teachers')->first()->users()->get();
+        return View('category.create', compact('teachers'));
     }
 
 
     public function saveCreate()
     {
-        $category = new Category;
         $input = Input::all();
-        $category->category = $input['category'];
-        $category->teacher = $input['teacher'];
-        $category->status = '1';
 
         $validator = Validator::make($input,
             array(
-                'category' => 'required|unique:categories,category|min:3',
+                'category' => 'required|unique:categories,name|min:3',
                 'teacher' => 'required'
             )
         );
         if ($validator->fails()) {
             return Redirect::to('category/create')->with('errors', $validator->messages());
-
-        } else {
-            $category->save();
-
-            return Redirect::action('Category\IndexController@home')->with('message', 'Class created successfully!');
-
         }
+        try {
+            $category = new Category;
+            $category->name = $input['category'];
+            $category->teacher_id = $input['teacher'];
+            $category->save();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return Redirect::action('Category\IndexController@home')->with('message', 'Class created successfully!');
     }
 
 

@@ -6,16 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    //
-    public $primaryKey = 'cat_id';
-    protected $table = 'categories';
-
-    public static function table($string)
+    public function teacher()
     {
-    }
-
-    public function users()
-    {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class,'teacher_id');
     }
 }
