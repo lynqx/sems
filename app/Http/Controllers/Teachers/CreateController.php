@@ -61,7 +61,7 @@ class CreateController extends LayoutsMainController
 
             $biodata = new Biodata;
             $biodata->user_id = $user->id;
-            $biodata->gender = $input['gender'];
+            $biodata->gender_id = $input['gender'];
             $biodata->marital_status = $input['m_status'];
             $biodata->date_of_birth = $input['dob'];
             $biodata->mobile = $input['mobile'];

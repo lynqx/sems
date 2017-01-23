@@ -40,7 +40,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Subjects</th>
+                        <th>Session</th>
                         <th>Date Added</th>
                         <th>Operations</th>
                     </tr>

@@ -57,7 +57,7 @@
                 <td>{{$teacher->firstname}} {{$teacher->middlename}} {{$teacher->lastname}}</td>
                 <td>{{$teacher->email}}</td>
                 <td>+234(0){{isset($teacher->biodata) ? $teacher->biodata->mobile :''}}</td>
-                <td>{{isset($teacher->biodata) ? $teacher->biodata->gender : 'not set'}}</td>
+                <td>{{isset($teacher->biodata) && isset($teacher->biodata->gender) ? $teacher->biodata->gender->name : 'not set'}}</td>
                 <td>{{$teacher->class}}</td>
                 <td><a href="{{action('Fee\UpdateController@home', $teacher->id) }}"
                        class="btn btn-success"> Edit </a>

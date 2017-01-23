@@ -41,7 +41,7 @@
                                         data-placeholder="Select a Class..." required>
                                     <option></option>
                                     @foreach($categorys as $category)
-                                        <option value="{{$category->cat_id}}">{{$category->category}}</option>
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
 

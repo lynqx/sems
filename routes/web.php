@@ -115,6 +115,10 @@ Route::group(['prefix' => 'students'], function () {
 
     Route::get('result/{slug}', ['uses' => 'Students\ResultController@home']);
     Route::post('result', ['as' => 'students.resultaction', 'uses' => 'Students\ResultController@saveResult']);
+
+    Route::get('timetable', ['uses' => 'Students\TimetableController@home']);
+
+
 });
 
 /***********************

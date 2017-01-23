@@ -104,7 +104,7 @@
                                     <select name="gender" class="select2" data-allow-clear="true" data-placeholder="Select a Gender..." required>
                                         <option></option>
                                         @foreach($genders as $gender)
-                                            <option value="{{$gender->id}}">{{$gender->gender}}</option>
+                                            <option value="{{$gender->id}}">{{$gender->name}}</option>
                                         @endforeach
                                     </select>
 

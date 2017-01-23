@@ -28,7 +28,7 @@
                                 <label for="field-2" class="col-sm-2 control-label">Class</label>
 
                                 <div class="col-sm-4">
-                                    <select name="category" class="select2 form-control required"
+                                    <select name="category" class="select2" id=""
                                             data-size="1"
                                             data-placeholder="Select a Class..." required>
                                         <option></option>

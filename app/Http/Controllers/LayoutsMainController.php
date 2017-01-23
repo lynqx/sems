@@ -30,7 +30,6 @@ class LayoutsMainController extends Controller
             $this->user = Auth::user();
             $this->init();
             $this->roles();
-            $this->students();
             $this->session();
             return $next($request);
         });
