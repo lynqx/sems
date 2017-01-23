@@ -236,19 +236,19 @@
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="mailbox.html">
+                        <a href="#">
                             <i class="entypo-mail"></i>
                             <span class="title">Teachers</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="mailbox.html">
-                                    <i class="entypo-inbox"></i>
+                                <a href="{{action('Teachers\CreateController@home')}}">
+                                    <i class="entypo-users-add"></i>
                                     <span class="title">Register Teachers</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="mailbox-compose.html">
+                                <a href="{{action('Teachers\IndexController@home')}}">
                                     <i class="entypo-pencil"></i>
                                     <span class="title">View all Teachers</span>
                                 </a>
@@ -279,18 +279,18 @@
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="tables-main.html">
+                        <a href="#">
                             <i class="entypo-window"></i>
                             <span class="title">Assignments</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="tables-main.html">
+                                <a href="#">
                                     <span class="title">Add Assignments</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="tables-datatable.html">
+                                <a href="#">
                                     <span class="title">Pending Assignments</span>
                                 </a>
                             </li>
@@ -302,27 +302,27 @@
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="extra-icons.html">
+                        <a href="#">
                             <i class="entypo-bag"></i>
                             <span class="title">Timetable</span>
                             <span class="badge badge-info badge-roundless">New</span>
                         </a>
                         <ul>
                             <li class="has-sub">
-                                <a href="extra-icons.html">
+                                <a href="#">
                                     <span class="title">Add Timetable</span>
                                     <span class="badge badge-success">3</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="extra-portlets.html">
+                                <a href="{{action('Students\TimetableController@home')}}">
                                     <span class="title">View Timetable</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="extra-icons.html">
+                        <a href="#">
                             <i class="entypo-bag"></i>
                             <span class="title">Library</span>
                             <span class="badge badge-info badge-roundless">New</span>
@@ -341,18 +341,18 @@
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="extra-icons.html">
+                        <a href="#">
                             <i class="entypo-bag"></i>
                             <span class="title">Reports</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="extra-gallery.html">
+                                <a href="#">
                                     <span class="title">View Academic Reports</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="extra-gallery-single.html">
+                                <a href="#">
                                     <span class="title">View Payment Reports</span>
                                 </a>
                             </li>
@@ -360,51 +360,46 @@
                     </li>
 
                     <li class="has-sub">
-                        <a href="extra-icons.html">
+                        <a href="#">
                             <i class="entypo-bag"></i>
                             <span class="title">Notifications</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="extra-gallery.html">
+                                <a href="#">
                                     <span class="title">Add Upcoming Events</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="extra-gallery-single.html">
+                                <a href="#">
                                     <span class="title">Add School News</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="extra-gallery-single.html">
+                                <a href="#">
                                     <span class="title">Notify Parents</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="extra-icons.html">
+                        <a href="#">
                             <i class="entypo-bag"></i>
                             <span class="title">Users</span>
                         </a>
                         <ul>
                             <li>
-                                <a href="extra-gallery.html">
-                                    <span class="title">Create Single Users</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="extra-gallery-single.html">
+                                <a href="#">
                                     <span class="title">Import Bulk Users</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="extra-gallery-single.html">
+                                <a href="#">
                                     <span class="title">View All Users</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="extra-gallery-single.html">
+                                <a href="#">
                                     <span class="title">Assign Roles</span>
                                 </a>
                             </li>
