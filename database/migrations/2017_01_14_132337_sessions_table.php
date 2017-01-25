@@ -15,7 +15,9 @@ class SessionsTable extends Migration
     {
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('session');
+            $table->string('start_year');
+            $table->string('end_year');
+            $table->string('term');
             $table->boolean('status');
             $table->timestamps();
         });
