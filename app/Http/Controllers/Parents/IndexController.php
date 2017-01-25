@@ -12,7 +12,7 @@ class IndexController extends LayoutsMainController
 {
     public function home()
     {
-        $parents = Role::where('role', 'Parents')
+        $parents = Role::where('name', 'Parents')
             ->first()->users()->get();
         return View('parents.home', compact('parents'));
     }

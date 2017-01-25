@@ -21,18 +21,19 @@ class DashboardController extends LayoutsMainController
     public function index()
     {
         $subjects = Course::all()->count();
-        $payments = Payment::all();
-        $students = Role::where('role','Students')->first()->users()->count();
-        $teachers = Role::where('role','Teachers')->first()->users()->count();
-        $newstudents = Role::where('role','Students')
+        $payments = []; //Payment::all();
+        $students = Role::where('name','Students')->first()->users()->count();
+        $teachers = Role::where('name','Teachers')->first()->users()->count();
+        $newstudents = Role::where('name','Students')
             //->where('created_at','Students') where date of creation falls within the current session and term
             ->first()->users()->count();
 
-        $totals = DB::table('payments as s1')
-            ->select(DB::raw('sum(s1.amount) as totalamount'
-            ))
-            ->where('s1.session_id', '1')
-            ->get();
+        $totals = [];
+//        DB::table('payments as s1')
+//            ->select(DB::raw('sum(s1.amount) as totalamount'
+//            ))
+//            ->where('s1.session_id', '1')
+//            ->get();
 
         return View('dashboard.home', [
             'user'=>$this->user,

@@ -29,7 +29,7 @@ class CreateController extends LayoutsMainController
     }
     public function saveCreate()
     {
-        $student_role = Role::query()->where('role', 'Students')->first();
+        $student_role = Role::query()->where('name', 'Students')->first();
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
@@ -54,6 +54,7 @@ class CreateController extends LayoutsMainController
             $pwd = rand('1000', '1000000');
             $user->password = Hash::make($pwd);
             $user->remember_token = $input['_token'];
+            $user->api_token = str_random(60);
             $user->active = '1';
             $biodata = new Biodata;
             $biodata->gender_id = $input['gender'];

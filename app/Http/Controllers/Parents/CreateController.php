@@ -26,40 +26,26 @@ class CreateController extends LayoutsMainController
     {
         $genders = Gender::all();
         $status = MaritalStatus::all();
-        $categorys = Category::all();
-        $student_role = Role::query()
-            ->where('role', 'Students')
-            ->first();
-
-        $students = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role')
-            ->leftjoin('users_roles', 'users.id', '=', 'users_roles.user_id')
-            ->leftjoin('roles', 'users_roles.role_id', '=', 'roles.id')
-            ->where('users_roles.role_id', $student_role->id)
-            ->get();
-        return View('parents.create', ['genders' => $genders, 'status' => $status, 'categorys' => $categorys,
-            'students' => $students]);
+        return View('parents.create', compact('genders', 'status'));
     }
-
 
     public function saveCreate()
     {
         $parent_role = Role::query()
-            ->where('role', 'Parents')
+            ->where('name', 'Parents')
             ->first();
-
         $rules = array(
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|email|unique:users,email',
             'gender' => 'required',
-            'm_status' => 'required',
-            'student' => 'required'
+            'marital_status' => 'required',
+            'children' => 'required',
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             return Redirect::to('parents/create')->with('errors', $validator->messages());
         }
-
         $input = Input::all();
         DB::beginTransaction();
         try {
@@ -71,15 +57,21 @@ class CreateController extends LayoutsMainController
             $pwd = rand('1000', '1000000');
             $user->password = Hash::make($pwd);
             $user->remember_token = $input['_token'];
+            $user->api_token = str_random(60);
             $user->active = '1';
             $user->save();
             $user->roles()->attach($parent_role->id);
-
+            $children = $input['children'];
+            foreach($children as $child) {
+                $student = User::find($child);
+                $student->parent()->associate($user->id);
+                $student->save();
+            }
             $biodata = new Biodata;
             $biodata->user_id = $user->id;
-            $biodata->gender = $input['gender'];
-            $biodata->marital_status = $input['m_status'];
-            $biodata->date_of_birth = $input['dob'];
+            $biodata->gender_id = $input['gender'];
+            $biodata->marital_status = $input['marital_status'];
+            $biodata->date_of_birth = $input['date_of_birth'];
             $biodata->mobile = $input['mobile'];
             $biodata->address = $input['address'];
             $biodata->save();

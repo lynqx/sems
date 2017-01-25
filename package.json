@@ -6,13 +6,34 @@
   },
   "devDependencies": {
     "bootstrap-sass": "^3.3.7",
+    "grunt": "^1.0.1",
+    "grunt-util": "^0.5.3",
     "gulp": "^3.9.1",
     "jquery": "^3.1.0",
     "laravel-elixir": "^6.0.0-9",
     "laravel-elixir-vue-2": "^0.2.0",
     "laravel-elixir-webpack-official": "^1.0.2",
-    "lodash": "^4.16.2",
+    "lodash": "^4.17.4",
+    "underscore": "^1.8.3",
+    "underscore.string": "^3.3.4",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
-  }
+  },
+  "name": "sems",
+  "description": "[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)\r [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)\r [![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)\r [![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)\r [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lynqx/sems.git"
+  },
+  "author": "Akinjiola Toni <akinjiolatoni@gmail.com> (https://ng.linkedin.com/in/toni-akinjiola-42ba7a94)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lynqx/sems/issues"
+  },
+  "homepage": "https://github.com/lynqx/sems#readme"
 }

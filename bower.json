@@ -1,0 +1,30 @@
+{
+  "name": "sems",
+  "version": "0.1.0",
+  "dependencies": {
+    "select2": "select2-ng#^4.0.3",
+    "jquery-selectboxit": "^3.8.1",
+    "bootstrap-daterangepicker": "^2.1.25",
+    "iCheck": "icheck#^1.0.2",
+    "gsap": "^1.19.1",
+    "jquery-ui": "jquery.ui#^1.12.1",
+    "jquery-validation": "^1.16.0",
+    "bootstrap": "^3.3.7",
+    "blockUI": "blockui#*",
+    "imagesloaded": "^4.1.1",
+    "jquery-hoverintent": "jquery-hoverIntent#^1.8.1",
+    "bootstrap-tagsinput": "^0.8.0",
+    "typeahead.js": "^0.11.1",
+    "bootstrap-datepicker": "^1.6.4",
+    "bootstrap-timepicker": "^0.5.2",
+    "bootstrap-colorpicker": "^2.4.0",
+    "multiselect": "multi-select#^0.9.12",
+    "datatables.net-bs": "^2.1.1"
+  },
+  "devDependencies": {},
+  "overrides": {
+    "font-awesome": {
+      "main": []
+    }
+  }
+}
