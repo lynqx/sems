@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('parent_id')->nullable();
             $table->integer('category_id')->nullable();
+            $table->string('api_token', 60)->unique();
             $table->rememberToken();
             $table->integer('active');
             $table->timestamps();

@@ -94,8 +94,10 @@
 
     </div>
 
-    <link rel="stylesheet" href="{{URL::asset('assets/js/datatables/datatables.css')}}">
-    <script src="{{URL::asset('assets/js/datatables/datatables.js')}}"></script>
+
+    <link rel="stylesheet" href="{{URL::asset('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
+    <script src="{{URL::asset('vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{URL::asset('vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 
     <script type="text/javascript" src="{{ URL::asset('js/category/delete.js') }}"></script>
 @stop

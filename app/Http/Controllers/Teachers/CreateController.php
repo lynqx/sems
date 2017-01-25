@@ -55,6 +55,7 @@ class CreateController extends LayoutsMainController
             $pwd = rand('1000', '1000000');
             $user->password = Hash::make($pwd);
             $user->remember_token = $input['_token'];
+            $user->api_token = str_random(60);
             $user->active = '1';
             $user->save();
             $user->roles()->attach($teacher_role->id);

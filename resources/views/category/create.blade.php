@@ -10,9 +10,7 @@
 @extends('layouts.main', ['page_title'=>'Create a New Class'])
 @section('content')
 
-
     <div class="row">
-
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="panel-title">Create a New Class</div>
@@ -20,7 +18,7 @@
 
             <div class="panel-body">
 
-                <form role="form" class="form-horizontal" action="/category/create" method="post">
+                <form id="create-form" role="form" class="form-horizontal" action="/category/create" method="post">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -66,4 +64,5 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="{!! asset('js/category/create.js') !!}"></script>
 @stop

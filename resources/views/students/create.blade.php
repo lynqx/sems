@@ -28,7 +28,7 @@
                                 <label for="field-2" class="col-sm-2 control-label">Class</label>
 
                                 <div class="col-sm-4">
-                                    <select name="category" class="select2" id=""
+                                    <select name="category" class="form-control select2" id=""
                                             data-size="1"
                                             data-placeholder="Select a Class..." required>
                                         <option></option>
@@ -127,7 +127,7 @@
                                 <label for="field-2" class="col-sm-4 control-label">Gender</label>
 
                                 <div class="col-sm-8">
-                                    <select name="gender" class="select2" data-allow-clear="true"
+                                    <select name="gender" class="form-control select2" data-allow-clear="true"
                                             data-placeholder="Select a Gender..." required>
                                         <option></option>
                                         @foreach($genders as $gender)
@@ -144,7 +144,7 @@
                                 <label for="field-2" class="col-sm-4 control-label">Marital Status</label>
 
                                 <div class="col-sm-8">
-                                    <select name="marital_status" class="select2" data-allow-clear="true"
+                                    <select name="marital_status" class="form-control select2" data-allow-clear="true"
                                             data-placeholder="Select a Status..." required>
                                         <option></option>
                                         @foreach($status as $mstat)

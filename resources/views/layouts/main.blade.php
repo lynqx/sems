@@ -24,7 +24,7 @@
         ?>
     </title>
 
-    <link rel="stylesheet" href="{{URL::asset('assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('vendors/jquery-ui/themes/base/all.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/font-icons/entypo/css/entypo.css')}}">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
     <link rel="stylesheet" href="{{URL::asset('assets/css/bootstrap.css')}}">
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/neon-forms.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/custom.css')}}">
 
-    <script src="{{URL::asset('assets/js/jquery-1.11.3.min.js')}}"></script>
+    <script src="{{URL::asset('vendors/jquery/dist/jquery.min.js')}}"></script>
 
     <!--[if lt IE 9]>
     <script src="{{URL::asset('assets/js/ie8-responsive-file-warning.js')}}"></script><![endif]-->
@@ -106,11 +106,11 @@
 
                 <div class="sui-normal">
                     <a href="#" class="user-link">
-                        <img src="{{URL::asset('assets/images/thumb-1.png')}}" width="55" alt="" class="img-circle"/>
+{{--                        <img src="{{URL::asset('assets/images/thumb-1.png')}}" width="55" alt="" class="img-circle"/>--}}
                         <span>Welcome,</span>
                         <strong>{{Auth::user()->firstname}} {{Auth::user()->lastname}} </strong>
                         @foreach(Auth::user()->roles as $role)
-                            <p class="label label-info">{{$role->role}}</p>
+                            <p class="label label-info">{{$role->name}}</p>
                         @endforeach
                     </a>
                 </div>
@@ -709,39 +709,43 @@
 
 
 <!-- Imported styles on this page -->
-<link rel="stylesheet" href="{{URL::asset('assets/js/select2/select2-bootstrap.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/select2/select2.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/selectboxit/jquery.selectBoxIt.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/daterangepicker/daterangepicker-bs3.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/minimal/_all.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/square/_all.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/flat/_all.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/futurico/futurico.css')}}">
-<link rel="stylesheet" href="{{URL::asset('assets/js/icheck/skins/polaris/polaris.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/select2/dist/css/select2.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/jquery-selectboxit/src/stylesheets/jquery.selectBoxIt.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/bootstrap-daterangepicker/daterangepicker.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/iCheck/skins/minimal/_all.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/iCheck/skins/square/_all.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/iCheck/skins/flat/_all.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/iCheck/skins/futurico/futurico.css')}}">
+<link rel="stylesheet" href="{{URL::asset('vendors/iCheck/skins/polaris/polaris.css')}}">
 
 
 <!-- Bottom scripts (common) -->
-<script src="{{URL::asset('assets/js/gsap/TweenMax.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.validate.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap.js')}}"></script>
-<script src="{{URL::asset('assets/js/joinable.js')}}"></script>
+<script src="{{URL::asset('vendors/gsap/src/minified/TweenMax.min.js')}}"></script>
+<script src="{{URL::asset('vendors/jquery-ui/dist/jquery-ui.min.js')}}"></script>
+<script src="{{URL::asset('vendors/jquery-validation/dist/jquery.validate.min.js')}}"></script>
+<script src="{{URL::asset('vendors/bootstrap/dist/js/bootstrap.js')}}"></script>
+<script src="{{URL::asset('vendors/jquery-hoverintent/jquery.hoverintent.js')}}"></script>
+<script src="{{URL::asset('vendors/ev-emitter/ev-emitter.js')}}"></script>
+<script src="{{URL::asset('vendors/imagesloaded/imagesloaded.js')}}"></script>
+<script src="{{URL::asset('vendors/blockUI/jquery.blockUI.js')}}"></script>
 <script src="{{URL::asset('assets/js/resizeable.js')}}"></script>
 <script src="{{URL::asset('assets/js/neon-api.js')}}"></script>
 
 
 <!-- Imported scripts on this page -->
-<script src="{{URL::asset('assets/js/select2/select2.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-tagsinput.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/typeahead.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/selectboxit/jquery.selectBoxIt.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-datepicker.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-timepicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/moment.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/daterangepicker/daterangepicker.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.multi-select.js')}}"></script>
-<script src="{{URL::asset('assets/js/icheck/icheck.min.js')}}"></script>
+<script src="{{URL::asset('vendors/select2/dist/js/select2.min.js')}}"></script>
+<script src="{{URL::asset('vendors/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+<script src="{{URL::asset('vendors/typeahead.js/dist/typeahead.jquery.js')}}"></script>
+<script src="{{URL::asset('vendors/jquery-selectboxit/src/javascripts/jquery.selectBoxIt.min.js')}}"></script>
+<script src="{{URL::asset('vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{URL::asset('vendors/bootstrap-timepicker/js/bootstrap-timepicker.js')}}"></script>
+<script src="{{URL::asset('vendors/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
+<script src="{{URL::asset('vendors/moment/moment.js')}}"></script>
+<script src="{{URL::asset('vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{URL::asset('vendors/multiselect/js/jquery.multi-select.js')}}"></script>
+<script src="{{URL::asset('vendors/iCheck/icheck.min.js')}}"></script>
+
+
 <script src="{{URL::asset('assets/js/neon-chat.js')}}"></script>
 
 

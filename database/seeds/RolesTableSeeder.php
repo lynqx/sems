@@ -8,9 +8,9 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::query()->delete();
-        Role::create(array('role' => 'Admin'));
-        Role::create(array('role' => 'Parents'));
-        Role::create(array('role' => 'Students'));
-        Role::create(array('role' => 'Teachers'));
+        Role::create(array('name' => 'Admin'));
+        Role::create(array('name' => 'Parents'));
+        Role::create(array('name' => 'Students'));
+        Role::create(array('name' => 'Teachers'));
     }
 }

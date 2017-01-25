@@ -12,16 +12,16 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $admin_role = Role::query()
-            ->where('role', 'Admin')
+            ->where('name', 'Admin')
             ->first();
         $parent_role = Role::query()
-            ->where('role', 'Parents')
+            ->where('name', 'Parents')
             ->first();
         $student_role = Role::query()
-            ->where('role', 'Students')
+            ->where('name', 'Students')
             ->first();
         $teacher_role = Role::query()
-            ->where('role', 'Teachers')
+            ->where('name', 'Teachers')
             ->first();
         $biodata = new Biodata();
         $biodata->gender_id = 1;
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         User::query()->delete();
         $admin_user = User::create(array('firstname' => 'Admin', 'middlename' => 'Admin', 'lastname' => 'Admin',
             'email' => 'admin@admin.com', 'password' => Hash::make('admin'),
-            'remember_token' => '_token', 'active' => '1'));
+            'remember_token' => '_token','api_token'=>str_random(60), 'active' => '1'));
         $admin_user->roles()->attach($admin_role->id);
         $admin_user->biodata()->save($biodata);
         $admin_user->save();
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
         $biodata->mobile = '08067335486';
         $parent_user = User::create(array('firstname' => 'Parent', 'middlename' => 'Parent', 'lastname' => 'Parent',
             'email' => 'parent@example.com', 'password' => Hash::make('parent'),
-            'remember_token' => '_token',  'active' => '1'));
+            'remember_token' => '_token','api_token'=>str_random(60),  'active' => '1'));
         $parent_user->roles()->attach($parent_role->id);
         $parent_user->biodata()->save($biodata);
         $parent_user->save();
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
         $biodata->mobile = '08067335486';
         $teacher_user = User::create(array('firstname' => 'Teacher', 'middlename' => 'Teacher', 'lastname' => 'Teacher',
             'email' => 'teacher@teacher.com', 'password' => Hash::make('teacher'),
-            'remember_token' => '_token', 'active' => '1'));
+            'remember_token' => '_token','api_token'=>str_random(60), 'active' => '1'));
         $teacher_user->roles()->attach($teacher_role->id);
         $teacher_user->biodata()->save($biodata);
         $teacher_user->save();
@@ -63,7 +63,7 @@ class UsersTableSeeder extends Seeder
         $biodata->mobile = '08067335486';
         $student_user = User::create(array('firstname' => 'Student', 'middlename' => 'Student', 'lastname' => 'Student',
             'email' => 'student@student.com', 'password' => Hash::make('student'),
-            'remember_token' => '_token', 'active' => '1'));
+            'remember_token' => '_token','api_token'=>str_random(60), 'active' => '1'));
         $student_user->roles()->attach($student_role->id);
         $student_user->parent()->associate($parent_user->id);
         $student_user->biodata()->save($biodata);
