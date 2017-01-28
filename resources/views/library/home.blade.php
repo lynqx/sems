@@ -67,7 +67,7 @@
             <tbody>
             @foreach($librarys as $library)
             <tr class="odd gradeX">
-                <td><img src="{{URL::asset('assets/images/'.$library->avatar)}}" width="80" class="img-circle"/></td>
+                <td><img src="{{URL::asset('assets/images/library/'.$library->avatar)}}" width="80" class="img-circle"/></td>
                 <td colspan="2"><br><h3>{{$library->title}}</h3></td>
                 <td></td>
                 <td><h4 class="label label-info"><b>Author:</b> {{$library->author}}</h4><br>

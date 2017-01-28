@@ -13,6 +13,13 @@
 
     <div class="row">
         <h3>View All Classes</h3>
+
+        <p class="text-right"><a href="javascript:;" onclick="jQuery('#modal-1').modal('show');"
+                                 class="btn btn-default btn-icon">
+                Add New Class
+                <i class="entypo-plus"></i>
+            </a>
+        </p>
         <br />
 
         <script type="text/javascript">
@@ -84,6 +91,67 @@
                 </table>
             @endif
         </div>
+
+
+    <!-- Modal 1 (Basic)-->
+    <div class="modal fade" id="modal-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add a New Class</h4>
+                </div>
+
+                <div class="modal-body">
+                    <form id="create-form" role="form" class="form-horizontal" action="/category/create" method="post">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="field-2" class="col-sm-3 control-label">Class</label>
+
+                                    <div class="col-sm-4">
+                                        <input type="text" name="category" class="form-control" id=""
+                                               placeholder="Category Name" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="field-2" class="col-sm-3 control-label">Teachers</label>
+
+                                    <div class="col-md-4">
+                                        <select name="teacher" class="form-control" data-placeholder="Select one teacher...">
+
+                                            <option></option>
+                                            @foreach($teachers as $teacher)
+                                                <option value="{{$teacher->id}}">{{$teacher->firstname}}  {{$teacher->lastname}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-5">
+                                        <button type="submit" class="btn btn-info">Create New Class</button>
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 
 
     <link rel="stylesheet" href="{{URL::asset('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">

@@ -37,11 +37,11 @@
                             <label for="field-2" class="col-sm-2 control-label">Class</label>
 
                             <div class="col-sm-10">
-                                <select name="class" class="select2" required="required" data-allow-clear="true"
+                                <select name="class" class="form-control select2" required="required" data-allow-clear="true"
                                         data-placeholder="Select a Class...">
                                     <option></option>
                                     @foreach($categorys as $category)
-                                        <option value="{{$category->cat_id}}">{{$category->category}}</option>
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
                                 </select>
 
@@ -58,7 +58,7 @@
                             <label for="field-2" class="col-sm-2 control-label">Subject</label>
 
                             <div class="col-sm-4">
-                                <select name="subject" class="select2" required="required" data-allow-clear="true"
+                                <select name="subject" class="form-control select2" required="required" data-allow-clear="true"
                                         data-placeholder="Select a Subject...">
                                     <option></option>
                                     @foreach($subjects as $subject)
@@ -76,7 +76,7 @@
                             <label for="field-2" class="col-sm-2 control-label">Criteria</label>
 
                             <div class="col-sm-4">
-                                <select name="criteria" class="select2" required="required" data-allow-clear="true"
+                                <select name="criteria" class="form-control select2" required="required" data-allow-clear="true"
                                         data-placeholder="Select a Criteria ...">
                                     <option></option>
                                     @foreach($criteria as $crit)

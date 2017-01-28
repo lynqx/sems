@@ -49,20 +49,149 @@
 
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="v-home">
-                                            <p>Carriage quitting securing be appetite it declared. High eyes kept so
-                                                busy feel call in. Would day nor ask walls known. But preserved
-                                                advantage are but and certainty earnestly enjoyment. Passage weather as
-                                                up am exposed. And natural related man subject. Eagerness get situation
-                                                his was delighted. </p>
+                                            <form role="form" class="form-horizontal form-groups-bordered"
+                                                  action="/parents/edit" method="post">
+                                                <div class="form-group">
+                                                    <label for="field-2" class="col-sm-2 control-label">First
+                                                        Name</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            <input type="text" name="firstname" class="form-control"
+                                                                   id="" placeholder="First Name"
+                                                                   value="{{$parent->firstname}}" required>
+                                                        </div>
+                                                    </div>
+                                                    <label for="field-2" class="col-sm-2 control-label">Middle
+                                                        Name</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
+                                                            </div>
+                                                            <input type="text" name="middlename"
+                                                                   class="form-control" id=""
+                                                                   placeholder="Middle Name"
+                                                                   value="{{$parent->middlename}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="field-2" class="col-sm-2 control-label">Last
+                                                        Name</label>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-users"></i>
+                                                            </div>
+                                                            <input type="text" name="lastname" class="form-control"
+                                                                   id="" placeholder="Last Name"
+                                                                   value="{{$parent->lastname}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="field-2"
+                                                           class="col-sm-2 control-label">Email</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-mail"></i>
+                                                            </div>
+                                                            <input type="email" name="email" class="form-control"
+                                                                   id="" placeholder="Email Address"
+                                                                   value="{{$parent->email}}">
+                                                        </div>
+                                                    </div>
+                                                    <label for="field-2" class="col-sm-2 control-label">Mobile
+                                                        Number</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-phone"></i>
+                                                            </div>
+                                                            <input type="tel" name="mobile" class="form-control"
+                                                                   id="" placeholder="Mobile Number"
+                                                                   value="{{$parent->biodata->mobile}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @if (empty($genders))
+                                                        <div class="panel-body">
+                                                            <p> No Genders available </p>
+                                                        </div>
+                                                    @else
+                                                        <label for="field-2"
+                                                               class="col-sm-2 control-label">Gender</label>
+
+                                                        <div class="col-sm-4">
+                                                            <select name="gender" class="form-control select2"
+                                                                    data-allow-clear="true"
+                                                                    data-placeholder="Select a Gender..." required>
+                                                                <option></option>
+                                                                @foreach($genders as $gender)
+                                                                    <option value="{{$gender->id}}"
+                                                                            {{isset($parent->biodata->gender->name) && $parent->biodata->gender->id == $gender->id ?"selected" : 'not set'}}>
+                                                                        {{$gender->name}}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                        </div>
+                                                    @endif
+                                                    @if (empty($status))
+                                                        <div class="panel-body">
+                                                            <p> No Marital Status available </p>
+                                                        </div>
+                                                    @else
+                                                        <label for="field-2" class="col-sm-2 control-label">Marital
+                                                            Status</label>
+                                                        <div class="col-sm-4">
+                                                            <select name="m_status" class="form-control select2"
+                                                                    data-allow-clear="true"
+                                                                    data-placeholder="Select a Status..." required>
+                                                                <option></option>
+                                                                @foreach($status as $mstat)
+                                                                    <option value="{{$mstat->id}}"
+                                                                            {{isset($parent->biodata->status) && $parent->biodata->status->id == $mstat->id ?"selected" : 'not set'}}>
+                                                                        {{$mstat->status}}</option>
+                                                                @endforeach
+                                                            </select>
+
+                                                        </div>
+                                                    @endif
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-3 col-sm-5">
+                                                        <button type="submit" class="btn btn-info">Update Record
+                                                        </button>
+                                                        <input type="hidden" name="_token"
+                                                               value="{{ csrf_token() }}"/>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                         <div class="tab-pane" id="v-profile">
-                                            <p>Fulfilled direction use continual set him propriety continued. Saw met
-                                                applauded favourite deficient engrossed concealed and her. Concluded boy
-                                                perpetual old supposing. Farther related bed and passage comfort
-                                                civilly. Dashwoods see frankness objection abilities the. As hastened oh
-                                                produced prospect formerly up am. Placing forming nay looking old
-                                                married few has. Margaret disposed add screened rendered six say his
-                                                striking confined. </p>
+                                            <div class="form-group">
+                                                <label for="field-ta" class="col-sm-3 control-label">Textarea</label>
+
+                                                <div class="col-sm-9">
+                                                    <textarea class="form-control" id="field-ta"
+                                                              placeholder="Textarea">{{$parent->biodata->address}}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -99,7 +228,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="text-right"><i class="entypo-menu"></i>Class :</td>
-                                                        <td> {{$child->class}} </td>
+                                                        <td> {{$child->category->name}} </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-right"><i class="entypo-phone"></i>Mobile :</td>
@@ -111,7 +240,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="text-right"><i class="entypo-user"></i> Gender :</td>
-                                                        <td> {{$child->sex}} </td>
+                                                        <td> {{$child->biodata->gender->name}} </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-right"><i class="entypo-calendar"></i>Date of
@@ -181,7 +310,8 @@
 
                         <p class="btn btn-info">{{isset($parent->biodata) ? $parent->biodata->date_of_birth : 'not set'}}</p>
                         <hr>
-                        <h4><i class="entypo-mobile"></i> {{isset($parent->biodata) ? $parent->biodata->mobile : ''}} </h4>
+                        <h4><i class="entypo-mobile"></i> {{isset($parent->biodata) ? $parent->biodata->mobile : ''}}
+                        </h4>
                         <hr>
                         <h4><i class="entypo-mail"></i> </span> {{$parent->email}} </h4>
                         <hr>

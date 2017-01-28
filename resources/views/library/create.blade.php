@@ -37,7 +37,7 @@
                             <label for="field-2" class="col-sm-1 control-label">Category</label>
 
                             <div class="col-sm-3">
-                                <select name="category" class="select2" required="required" data-allow-clear="true"
+                                <select name="category" class="form-control select2" required="required" data-allow-clear="true"
                                         data-placeholder="Select a Class...">
                                     <option></option>
                                     @foreach($categorys as $category)

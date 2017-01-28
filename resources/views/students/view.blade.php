@@ -330,133 +330,133 @@
                                             <form role="form" class="form-horizontal form-groups-bordered"
                                                   action="/students/edit" method="post">
 
-                                                    <div class="form-group">
-                                                        <label for="field-2" class="col-sm-2 control-label">First
-                                                            Name</label>
+                                                <div class="form-group">
+                                                    <label for="field-2" class="col-sm-2 control-label">First
+                                                        Name</label>
 
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                <input type="text" name="firstname" class="form-control"
-                                                                       id="" placeholder="First Name"
-                                                                       value="{{$user->parent->firstname}}" required>
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
                                                             </div>
-                                                        </div>
-                                                        <label for="field-2" class="col-sm-2 control-label">Middle
-                                                            Name</label>
-
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-user"></i>
-                                                                </div>
-                                                                <input type="text" name="middlename"
-                                                                       class="form-control" id=""
-                                                                       placeholder="Middle Name"
-                                                                       value="{{$user->parent->middlename}}" required>
-                                                            </div>
+                                                            <input type="text" name="firstname" class="form-control"
+                                                                   id="" placeholder="First Name"
+                                                                   value="{{$user->parent->firstname}}" required>
                                                         </div>
                                                     </div>
+                                                    <label for="field-2" class="col-sm-2 control-label">Middle
+                                                        Name</label>
 
-                                                    <div class="form-group">
-                                                        <label for="field-2" class="col-sm-2 control-label">Last
-                                                            Name</label>
-
-                                                        <div class="col-sm-6">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-users"></i>
-                                                                </div>
-                                                                <input type="text" name="lastname" class="form-control"
-                                                                       id="" placeholder="Last Name"
-                                                                       value="{{$user->parent->lastname}}" required>
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-user"></i>
                                                             </div>
+                                                            <input type="text" name="middlename"
+                                                                   class="form-control" id=""
+                                                                   placeholder="Middle Name"
+                                                                   value="{{$user->parent->middlename}}" required>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="field-2" class="col-sm-2 control-label">Last
+                                                        Name</label>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-users"></i>
+                                                            </div>
+                                                            <input type="text" name="lastname" class="form-control"
+                                                                   id="" placeholder="Last Name"
+                                                                   value="{{$user->parent->lastname}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="field-2"
+                                                           class="col-sm-2 control-label">Email</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-mail"></i>
+                                                            </div>
+                                                            <input type="email" name="email" class="form-control"
+                                                                   id="" placeholder="Email Address"
+                                                                   value="{{$user->parent->email}}">
+                                                        </div>
+                                                    </div>
+                                                    <label for="field-2" class="col-sm-2 control-label">Mobile
+                                                        Number</label>
+
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon">
+                                                                <i class="entypo-phone"></i>
+                                                            </div>
+                                                            <input type="tel" name="mobile" class="form-control"
+                                                                   id="" placeholder="Mobile Number"
+                                                                   value="{{$user->parent->biodata->mobile}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    @if (empty($genders))
+                                                        <div class="panel-body">
+                                                            <p> No Genders available </p>
+                                                        </div>
+                                                    @else
                                                         <label for="field-2"
-                                                               class="col-sm-2 control-label">Email</label>
+                                                               class="col-sm-2 control-label">Gender</label>
 
                                                         <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-mail"></i>
-                                                                </div>
-                                                                <input type="email" name="email" class="form-control"
-                                                                       id="" placeholder="Email Address"
-                                                                       value="{{$user->parent->email}}">
-                                                            </div>
+                                                            <select name="gender" class="select2"
+                                                                    data-allow-clear="true"
+                                                                    data-placeholder="Select a Gender..." required>
+                                                                <option></option>
+                                                                @foreach($genders as $gender)
+                                                                    <option value="{{$gender->id}}">{{$gender->gender}}</option>
+                                                                @endforeach
+                                                            </select>
+
                                                         </div>
-                                                        <label for="field-2" class="col-sm-2 control-label">Mobile
-                                                            Number</label>
+                                                    @endif
+
+                                                    @if (empty($status))
+                                                        <div class="panel-body">
+                                                            <p> No Marital Status available </p>
+                                                        </div>
+                                                    @else
+                                                        <label for="field-2" class="col-sm-2 control-label">Marital
+                                                            Status</label>
 
                                                         <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <div class="input-group-addon">
-                                                                    <i class="entypo-phone"></i>
-                                                                </div>
-                                                                <input type="tel" name="mobile" class="form-control"
-                                                                       id="" placeholder="Mobile Number"
-                                                                       value="{{$user->parent->biodata->mobile}}" required>
-                                                            </div>
+                                                            <select name="m_status" class="select2"
+                                                                    data-allow-clear="true"
+                                                                    data-placeholder="Select a Status..." required>
+                                                                <option></option>
+                                                                @foreach($status as $mstat)
+                                                                    <option value="{{$mstat->id}}">{{$mstat->status}}</option>
+                                                                @endforeach
+                                                            </select>
+
                                                         </div>
+                                                    @endif
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-3 col-sm-5">
+                                                        <button type="submit" class="btn btn-info">Update Record
+                                                        </button>
+                                                        <input type="hidden" name="_token"
+                                                               value="{{ csrf_token() }}"/>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        @if (empty($genders))
-                                                            <div class="panel-body">
-                                                                <p> No Genders available </p>
-                                                            </div>
-                                                        @else
-                                                            <label for="field-2"
-                                                                   class="col-sm-2 control-label">Gender</label>
-
-                                                            <div class="col-sm-4">
-                                                                <select name="gender" class="select2"
-                                                                        data-allow-clear="true"
-                                                                        data-placeholder="Select a Gender..." required>
-                                                                    <option></option>
-                                                                    @foreach($genders as $gender)
-                                                                        <option value="{{$gender->id}}">{{$gender->gender}}</option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                            </div>
-                                                        @endif
-
-                                                        @if (empty($status))
-                                                            <div class="panel-body">
-                                                                <p> No Marital Status available </p>
-                                                            </div>
-                                                        @else
-                                                            <label for="field-2" class="col-sm-2 control-label">Marital
-                                                                Status</label>
-
-                                                            <div class="col-sm-4">
-                                                                <select name="m_status" class="select2"
-                                                                        data-allow-clear="true"
-                                                                        data-placeholder="Select a Status..." required>
-                                                                    <option></option>
-                                                                    @foreach($status as $mstat)
-                                                                        <option value="{{$mstat->id}}">{{$mstat->status}}</option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                            </div>
-                                                        @endif
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-offset-3 col-sm-5">
-                                                            <button type="submit" class="btn btn-info">Update Record
-                                                            </button>
-                                                            <input type="hidden" name="_token"
-                                                                   value="{{ csrf_token() }}"/>
-                                                        </div>
-                                                    </div>
+                                                </div>
                                             </form>
 
                                         </div>

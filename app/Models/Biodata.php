@@ -10,4 +10,9 @@ class Biodata extends Model
     {
         return $this->belongsTo(Gender::class, 'gender_id');
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'marital_status');
+    }
 }

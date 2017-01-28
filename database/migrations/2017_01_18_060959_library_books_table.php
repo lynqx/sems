@@ -22,7 +22,7 @@ class LibraryBooksTable extends Migration
             $table->integer('category');
             $table->string('publisher');
             $table->integer('copies');
-            $table->integer('shelf_no');
+            $table->string('shelf_no');
             $table->string('book_position');
             $table->integer('cost');
             $table->integer('condition');

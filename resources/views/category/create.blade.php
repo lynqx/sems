@@ -54,7 +54,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-5">
-                                    <button type="submit" class="btn btn-info">Create Category</button>
+                                    <button type="submit" class="btn btn-info">Create New Class</button>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                                 </div>
                             </div>

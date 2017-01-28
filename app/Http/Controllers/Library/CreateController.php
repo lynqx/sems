@@ -37,7 +37,7 @@ class CreateController extends LayoutsMainController
 
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
-            return Redirect::to('students/create')->with('errors', $validator->messages());
+            return Redirect::to('library/create')->with('errors', $validator->messages());
 
         } else {
 

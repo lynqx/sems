@@ -21,7 +21,7 @@ class DashboardController extends LayoutsMainController
     public function index()
     {
         $subjects = Course::all()->count();
-        $payments = []; //Payment::all();
+        $payments = Payment::all();
         $students = Role::where('name','Students')->first()->users()->count();
         $teachers = Role::where('name','Teachers')->first()->users()->count();
         $newstudents = Role::where('name','Students')
