@@ -23,7 +23,7 @@
 
     <title>Login | SEMS</title>
 
-    <link rel="stylesheet" href="{{URL::asset('assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('vendors/jquery-ui/themes/base/all.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/font-icons/entypo/css/entypo.css')}}">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/bootstrap.css')}}">
@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{URL::asset('assets/css/neon-forms.css')}}">
     <link rel="stylesheet" href="{{URL::asset('assets/css/custom.css')}}">
 
-    <script src="{{URL::asset('assets/js/jquery-1.11.3.min.js')}}"></script>
+    <script src="{{URL::asset('vendors/jquery/dist/jquery.min.js')}}"></script>
 
     <!--[if lt IE 9]>
     <script src="{{URL::asset('assets/js/ie8-responsive-file-warning.js')}}"></script><![endif]-->
@@ -63,13 +63,16 @@
 
 
         <!-- Bottom scripts (common) -->
-<script src="{{URL::asset('assets/js/gsap/TweenMax.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap.js')}}"></script>
-<script src="{{URL::asset('assets/js/joinable.js')}}"></script>
+<script src="{{URL::asset('vendors/gsap/src/minified/TweenMax.min.js')}}"></script>
+<script src="{{URL::asset('vendors/jquery-ui/dist/jquery-ui.min.js')}}"></script>
+<script src="{{URL::asset('vendors/jquery-validation/dist/jquery.validate.min.js')}}"></script>
+<script src="{{URL::asset('vendors/bootstrap/dist/js/bootstrap.js')}}"></script>
+<script src="{{URL::asset('vendors/jquery-hoverintent/jquery.hoverintent.js')}}"></script>
+<script src="{{URL::asset('vendors/ev-emitter/ev-emitter.js')}}"></script>
+<script src="{{URL::asset('vendors/imagesloaded/imagesloaded.js')}}"></script>
+<script src="{{URL::asset('vendors/blockUI/jquery.blockUI.js')}}"></script>
 <script src="{{URL::asset('assets/js/resizeable.js')}}"></script>
 <script src="{{URL::asset('assets/js/neon-api.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/neon-login.js')}}"></script>
 
 

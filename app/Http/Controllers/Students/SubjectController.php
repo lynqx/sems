@@ -19,12 +19,12 @@ class SubjectController extends LayoutsMainController
 {
     public function home($slug)
     {
-        $users = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.role as role',
-            'categories.category as class','categories.cat_id as c_id', 'categories.teacher as teacher')
+        $users = User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname', 'roles.name as role',
+            'categories.name as class','categories.id as c_id', 'categories.teacher_id as teacher')
             ->leftjoin('users_roles', 'users.id', '=', 'users_roles.user_id')
             ->leftjoin('roles', 'users_roles.role_id', '=', 'roles.id')
             ->leftjoin('student_class', 'users.id', '=', 'student_class.user_id')
-            ->leftjoin('categories', 'student_class.categories_id', '=', 'categories.cat_id')
+            ->leftjoin('categories', 'student_class.categories_id', '=', 'categories.id')
             ->where('users.id', $slug)
             ->limit('1')
             ->get();
