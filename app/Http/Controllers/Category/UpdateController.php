@@ -15,7 +15,7 @@ class UpdateController extends LayoutsMainController
 {
     public function home($slug)
     {
-        $category = Category::findOrFail($slug);
+        $students = User::findOrFail($slug);
         $users = User::where('role', '3')
             ->get();
         return View('category.edit', ['category' => $category, 'users' => $users]);

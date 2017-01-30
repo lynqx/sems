@@ -56,6 +56,10 @@ Route::group(['prefix' => 'category'], function () {
     Route::get('edit/{slug}', 'Category\UpdateController@home');
     Route::post('edit', 'Category\UpdateController@doEdit');
     Route::post('delete/{slug}', 'Category\DeleteController@index');
+
+    Route::get('student/{slug}', 'Category\StudentController@home');
+    Route::get('subject/{slug}', 'Category\SubjectController@home');
+
 });
 
 

@@ -20,13 +20,13 @@
                 <i class="entypo-plus"></i>
             </a>
         </p>
-        <br />
+        <br/>
 
         <script type="text/javascript">
-            jQuery( document ).ready( function( $ ) {
-                var $table4 = jQuery( "#table-4" );
+            jQuery(document).ready(function ($) {
+                var $table4 = jQuery("#table-4");
 
-                $table4.DataTable( {
+                $table4.DataTable({
                     dom: 'Bfrtip',
                     buttons: [
                         'copyHtml5',
@@ -34,63 +34,80 @@
                         'csvHtml5',
                         'pdfHtml5'
                     ]
-                } );
-            } );
+                });
+            });
         </script>
-            @if (empty($categories))
-                <div class="panel-body">
-                    <p> No classes has been added for your school </p>
-                </div>
+        @if (empty($categories))
+            <div class="panel-body">
+                <p> No classes has been added for your school </p>
+            </div>
 
-            @else
-                <table class="table table-bordered table-responsive">
-                    <thead>
+        @else
+            <table class="table table-bordered table-responsive">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Teacher</th>
+                    <th>Status</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach($categories as $category)
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Teacher</th>
-                        <th>Status</th>
-                        <th>Date Added</th>
-                        <th>Actions</th>
+                        <td>{{$category->id}}</td>
+                        <td>{{$category->name}}</td>
+                        <td>{{$category->name}}</td>
+                        {{--<td>{{$category->teacher}}  {{$category->teacher->lastname}}</td>--}}
+                        <td>
+                            @if($category->status == 1)
+                                <p class="btn btn-info">Active</p>
+                            @else
+                                <p class="btn btn-default">Pending</p>
+                            @endif
+                        </td>
+                        <td>{{$category->created_at}}</td>
+                        <td>
+                            <div class="btn-group left-dropdown">
+                                <button type="button" class="btn btn-danger">Actions</button>
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-info" role="menu">
+                                    <li><a href="{{action('Category\StudentController@home', $category->id) }}"> View Students </a>
+                                    </li>
+                                    <li><a href="{{action('Students\SubjectController@home', $category->id) }}">
+                                            View Subjects</a>
+                                    </li>
+                                    <li><a href="{{action('Category\UpdateController@home', $category->id) }}"> Edit </a>
+                                    </li>
+                                    <li><a href="#">Deactivate</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="javascript;"
+                                           data-delete="{{$category->id}}">
+                                            Delete
+                                        </a>
+
+                                        <form id="delete-form-{{$category->id}}"
+                                              action="{{ action('Category\DeleteController@index', $category->id) }}"
+                                              method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
                     </tr>
-                    </thead>
 
-                    <tbody>
-                    @foreach($categories as $category)
-                        <tr>
-                            <td>{{$category->id}}</td>
-                            <td>{{$category->name}}</td>
-                            <td>{{$category->teacher->firstname}}  {{$category->teacher->lastname}}</td>
-                            <td>
-                                @if($category->status == 1)
-                                    <p class="btn btn-info">Active</p>
-                                @else
-                                    <p class="btn btn-default">Pending</p>
-                                @endif
-                            </td>
-                            <td>{{$category->created_at}}</td>
-                            <td><a href="{{action('Category\UpdateController@home', $category->id) }}"
-                                   class="btn btn-success"> Edit </a>
-
-                                <a href="javascript;"
-                                   class="btn btn-danger"
-                                   data-delete="{{$category->id}}">
-                                    Delete
-                                </a>
-
-                                <form id="delete-form-{{$category->id}}"
-                                      action="{{ action('Category\DeleteController@index', $category->id) }}"
-                                      method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </td>
-                        </tr>
-
-                    @endforeach
-                    </tbody>
-                </table>
-            @endif
-        </div>
+                @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
 
 
     <!-- Modal 1 (Basic)-->
@@ -124,7 +141,8 @@
                                     <label for="field-2" class="col-sm-3 control-label">Teachers</label>
 
                                     <div class="col-md-4">
-                                        <select name="teacher" class="form-control" data-placeholder="Select one teacher...">
+                                        <select name="teacher" class="form-control"
+                                                data-placeholder="Select one teacher...">
 
                                             <option></option>
                                             @foreach($teachers as $teacher)
