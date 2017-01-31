@@ -15,14 +15,6 @@ class IndexController extends LayoutsMainController
     {
         $categories = Category::all();
         $teachers = Role::where('name', 'Teachers')->first()->users()->get();
-        return View('category.home', ['categories' => $categories, 'teachers' => $teachers]);
+        return View('category.home', compact('categories', 'teachers'));
     }
-
-   /* public function home()
-    {
-        $categories = \App\Models\Category::with('articles')->get();
-        return View('category.home', [
-            'categorys' => Category::all()
-        ]);
-    }*/
 }

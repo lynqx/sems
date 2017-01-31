@@ -62,7 +62,7 @@
                                         data-placeholder="Select a Subject...">
                                     <option></option>
                                     @foreach($subjects as $subject)
-                                        <option value="{{$subject->id}}">{{$subject->course}}</option>
+                                        <option value="{{$subject->id}}">{{$subject->name}}</option>
                                     @endforeach
                                 </select>
 

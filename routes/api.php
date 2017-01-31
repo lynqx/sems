@@ -18,3 +18,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/students/search', 'Api\StudentsController@search')->middleware('auth:api');
+
+Route::get('/subjects/find', 'Api\SubjectsController@find')->middleware('auth:api');

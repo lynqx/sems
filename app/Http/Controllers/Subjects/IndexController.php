@@ -15,15 +15,6 @@ class IndexController extends LayoutsMainController
     public function home()
     {
         $subjects = Course::all();
-
         return View('subjects.home', compact('subjects'));
     }
-
-    /* public function home()
-     {
-         $categories = \App\Models\Category::with('articles')->get();
-         return View('category.home', [
-             'categorys' => Category::all()
-         ]);
-     }*/
 }

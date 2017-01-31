@@ -15,8 +15,8 @@ class ClassCourseTable extends Migration
     {
         Schema::create('class_course', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('class');
-            $table->integer('course');
+            $table->integer('category_id');
+            $table->integer('course_id');
             $table->integer('criteria');
             $table->boolean('status');
             $table->timestamps();

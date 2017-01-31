@@ -23,24 +23,19 @@ class CreateController extends LayoutsMainController
 
     public function saveCreate()
     {
-        $subject = new Course;
         $input = Input::all();
-        $subject->course = $input['subject'];
-
         $validator = Validator::make($input,
             array(
-                'subject' => 'required|unique:courses,course|min:3'
+                'subject' => 'required|unique:courses,name|min:3'
             )
         );
         if ($validator->fails()) {
             return Redirect::to('subjects/create')->with('errors', $validator->messages());
-
-        } else {
-            $subject->save();
-
-            return Redirect::action('Subjects\IndexController@home')->with('message', 'Subject created successfully!');
-
         }
+        $subject = new Course;
+        $subject->name = $input['subject'];
+        $subject->save();
+        return Redirect::action('Subjects\IndexController@home')->with('message', 'Subject created successfully!');
     }
 
 

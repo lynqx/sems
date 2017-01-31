@@ -57,7 +57,7 @@
                     @foreach($subjects as $subject)
                         <tr>
                             <td>{{$subject->id}}</td>
-                            <td>{{$subject->course}}</td>
+                            <td>{{$subject->name}}</td>
                             <td>{{$subject->created_at}}</td>
                             <td><a href="{{action('Subjects\UpdateController@home', $subject->id) }}"
                                    class="btn btn-success"> Edit </a>

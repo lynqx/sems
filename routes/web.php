@@ -113,7 +113,7 @@ Route::group(['prefix' => 'students'], function () {
 
     Route::get('view/{slug}', 'Students\ViewController@home');
 
-    Route::get('subject/{slug}', ['uses' => 'Students\SubjectController@home']);
+    Route::get('{slug}/subject', ['uses' => 'Students\SubjectController@home']);
     Route::post('subject', ['as' => 'students.subjectaction', 'uses' => 'Students\SubjectController@saveSubject']);
 
 

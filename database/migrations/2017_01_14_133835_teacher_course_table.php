@@ -13,10 +13,10 @@ class TeacherCourseTable extends Migration
      */
     public function up()
     {
-        Schema::create('teacher_subject', function (Blueprint $table) {
+        Schema::create('teacher_course', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('teacher');
-            $table->integer('subject');
+            $table->integer('teacher_id');
+            $table->integer('course_id');
             $table->timestamps();
         });
     }
@@ -28,7 +28,7 @@ class TeacherCourseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teacher_subject');
+        Schema::dropIfExists('teacher_course');
 
     }
 }

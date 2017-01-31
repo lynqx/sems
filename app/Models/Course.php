@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     //
+    public function criteria()
+    {
+        return $this->hasOne(Criteria::class,'id');
+    }
 }

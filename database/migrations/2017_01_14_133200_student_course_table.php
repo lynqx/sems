@@ -13,11 +13,11 @@ class StudentCourseTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_subject', function (Blueprint $table) {
+        Schema::create('student_course', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student');
-            $table->integer('subject');
-            $table->boolean('session');
+            $table->integer('student_id');
+            $table->integer('course_id');
+            $table->boolean('session_id');
             $table->timestamps();
         });
     }
@@ -29,7 +29,7 @@ class StudentCourseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_subject');
+        Schema::dropIfExists('student_course');
 
     }
 }
