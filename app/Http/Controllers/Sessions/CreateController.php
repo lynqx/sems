@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Sessions;
 use App\Http\Controllers\LayoutsMainController;
 use App\Models\Course;
 use App\Models\Session;
+use App\Models\Term;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -18,7 +19,8 @@ class CreateController extends LayoutsMainController
 {
     public function home()
     {
-        return View('sessions.create');
+        $terms = Term::all();
+        return View('sessions.create', ['terms' => $terms]);
     }
 
 
@@ -26,18 +28,24 @@ class CreateController extends LayoutsMainController
     {
         $session = new Session;
         $input = Input::all();
-        $session->session = $input['session'];
+        $session->start_year = $input['start'];
+        $session->end_year = $input['end'];
+        $session->term = $input['term'];
         $session->status = '1';
 
         $validator = Validator::make($input,
             array(
-                'session' => 'required|unique:sessions,session'
+                'start' => 'required',
+                'end' => 'required',
+                'term' => 'required'
+
             )
         );
         if ($validator->fails()) {
             return Redirect::to('sessions/create')->with('errors', $validator->messages());
 
         } else {
+
 
             Session::where('status', 1)
                 ->update(['status' => 0]);

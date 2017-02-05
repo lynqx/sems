@@ -15,14 +15,16 @@ class SubjectController extends LayoutsMainController
 {
     public function home($slug)
     {
-
-        $class = Category::findOrFail($slug);
-
         // error to be fixed
-        /*$subjects = ClassCourse::where('class', $slug)
-            ->get();*/
+        // supposed to output the subjects available to this class
+        // present in category/view subjects
 
-        return View('category.subject', compact('subjects', 'class'));
+        $category = Category::findOrFail($slug);
+       // $category = Category::find($user->category->id);
+        $subjects = $category->courses()->get();
+
+           return View('category.subject', compact('subjects', 'category'));
     }
 
 }
+

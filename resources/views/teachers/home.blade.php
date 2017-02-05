@@ -84,6 +84,7 @@
                 <th>#</th>
                 <th>Full Name</th>
                 <th>Email</th>
+                <th>Mobile</th>
                 <th>Gender</th>
                 <th>Class</th>
                 <th>Operations</th>

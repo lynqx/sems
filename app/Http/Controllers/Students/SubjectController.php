@@ -43,12 +43,28 @@ class SubjectController extends LayoutsMainController
             $input = Input::all();
             $student = Student::find($input['student']);
             $courses = $input['courses'];
-            foreach($courses as $course){
-                $student->courses()->attach($course,array('session_id' => 1));
+            foreach ($courses as $course) {
+
+                /*       //check if not previously added
+                       $previous = Student::query()
+                           ->where('student_id', $input['student'])
+                           ->where('course_id', $course)
+                           ->first();
+
+                       if ($previous) {
+                           return Redirect::to('students')->with('message', 'Subject already exist for the chosen student!');
+                       } else {
+                */
+
+                $student->courses()->attach($course, array('session_id' => 1));
                 $student->save();
+                // }
+
             }
         } catch (\Exception $e) {
             DB::rollback();
+
+            //getErrors method below aint working
             return Redirect::to('students')->withErrors($e->getErrors())->withInput();
         }
         DB::commit();

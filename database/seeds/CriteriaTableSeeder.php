@@ -13,10 +13,10 @@ class CriteriaTableSeeder extends Seeder
     public function run()
     {
         Criteria::query()->delete();
-        Criteria::create(array('criteria' => 'Core'));
-        Criteria::create(array('criteria' => 'Compulsory'));
-        Criteria::create(array('criteria' => 'Required'));
-        Criteria::create(array('criteria' => 'Electives'));
-        Criteria::create(array('criteria' => 'Choice'));
+        Criteria::create(array('name' => 'Core'));
+        Criteria::create(array('name' => 'Compulsory'));
+        Criteria::create(array('name' => 'Required'));
+        Criteria::create(array('name' => 'Electives'));
+        Criteria::create(array('name' => 'Choice'));
     }
 }

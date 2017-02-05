@@ -28,8 +28,8 @@ class ClassController extends LayoutsMainController
     {
         $subject = new ClassCourse;
         $input = Input::all();
-        $subject->class = $input['class'];
-        $subject->course = $input['subject'];
+        $subject->category_id = $input['class'];
+        $subject->course_id = $input['subject'];
         $subject->criteria = $input['criteria'];
         $subject->status = '1';
 
@@ -46,8 +46,8 @@ class ClassController extends LayoutsMainController
         } else {
             //check if not previously added
             $previous = ClassCourse::query()
-                ->where('class', $input['class'])
-                ->where('course', $input['subject'])
+                ->where('category_id', $input['class'])
+                ->where('course_id', $input['subject'])
                 ->first();
 
             if ($previous) {

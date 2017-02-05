@@ -165,7 +165,7 @@
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="ui-panels.html">
+                        <a href="#">
                             <i class="entypo-newspaper"></i>
                             <span class="title">Fees</span>
                         </a>
@@ -216,7 +216,7 @@
                         </ul>
                     </li>
                     <li class="has-sub">
-                        <a href="mailbox.html">
+                        <a href="#">
                             <i class="entypo-briefcase"></i>
                             <span class="title">Parents</span>
                         </a>
@@ -295,7 +295,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="tables-datatable.html">
+                                <a href="#">
                                     <span class="title">Submitted Assignments</span>
                                 </a>
                             </li>
@@ -433,8 +433,8 @@
                             </li>
                         </ul>
                     </li>
-                @endif
-                @if(Auth::user()->hasRole('Parents'))
+
+                @elseif(Auth::user()->hasRole('Parents'))
                     <li class="has-sub">
                         <a href="#">
                             <i class="entypo-layout"></i>
@@ -610,7 +610,7 @@
                             </li>
 
                             <li class="external">
-                                <a href="mailbox.html">All Messages</a>
+                                <a href="#">All Messages</a>
                             </li>
                         </ul>
 
@@ -664,7 +664,7 @@
                     @if(empty($session))
                         <span class="badge badge-danger badge-roundless">NO SESSION</span>
                     @else
-                        <span class="badge badge-info badge-roundless">ACADEMIC SESSION: {{$session->session}}</span>
+                        <span class="badge badge-info badge-roundless">ACADEMIC SESSION: {{$session->start_year}} / {{$session->end_year}} ({{$session->term}})</span>
                     @endif
                 </div>
             </div>

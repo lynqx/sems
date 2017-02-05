@@ -80,7 +80,7 @@
                                         data-placeholder="Select a Criteria ...">
                                     <option></option>
                                     @foreach($criteria as $crit)
-                                        <option value="{{$crit->id}}">{{$crit->criteria}}</option>
+                                        <option value="{{$crit->id}}">{{$crit->name}}</option>
                                     @endforeach
                                 </select>
 

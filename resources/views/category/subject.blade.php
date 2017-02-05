@@ -7,12 +7,12 @@
  */
 ?>
 
-@extends('layouts.main', ['page_title'=>'Subjects of {{$class->name}}'])
+@extends('layouts.main', ['page_title'=>'Subjects of'])
 @section('content')
 
 
     <div class="row">
-        <h3>Subjects of {{$class->name}}</h3>
+        <h3>Subjects of</h3>
         <br/>
 
         @if (empty($subjects))

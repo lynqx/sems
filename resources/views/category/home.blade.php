@@ -79,8 +79,11 @@
                                 <ul class="dropdown-menu dropdown-info" role="menu">
                                     <li><a href="{{action('Category\StudentController@home', $category->id) }}"> View Students </a>
                                     </li>
-                                    <li><a href="{{action('Students\SubjectController@home', $category->id) }}">
+                                    <li><a href="{{action('Category\SubjectController@home', $category->id) }}">
                                             View Subjects</a>
+                                    </li>
+                                    <li><a href="{{action('Students\SubjectController@home', $category->id) }}">
+                                            View Timetable</a>
                                     </li>
                                     <li><a href="{{action('Category\UpdateController@home', $category->id) }}"> Edit </a>
                                     </li>
