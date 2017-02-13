@@ -106,7 +106,7 @@
 
                 <div class="sui-normal">
                     <a href="#" class="user-link">
-{{--                        <img src="{{URL::asset('assets/images/thumb-1.png')}}" width="55" alt="" class="img-circle"/>--}}
+                        <img src="{{URL::asset('assets/images/thumb-1.png')}}" width="55" alt="" class="img-circle"/>
                         <span>Welcome,</span>
                         <strong>{{Auth::user()->firstname}} {{Auth::user()->lastname}} </strong>
                         @foreach(Auth::user()->roles as $role)
@@ -664,7 +664,7 @@
                     @if(empty($session))
                         <span class="badge badge-danger badge-roundless">NO SESSION</span>
                     @else
-                        <span class="badge badge-info badge-roundless">ACADEMIC SESSION: {{$session->start_year}} / {{$session->end_year}} ({{$session->term}})</span>
+                        <span class="badge badge-info badge-roundless">ACADEMIC SESSION: {{$session->start_year}} / {{$session->end_year}} ({{$session->term->name}} Term)</span>
                     @endif
                 </div>
             </div>

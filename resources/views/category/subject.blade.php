@@ -7,7 +7,8 @@
  */
 ?>
 
-@extends('layouts.main', ['page_title'=>'Subjects of'])
+@extends('layouts.main', ['page_title'=>'Subjects of '.$class->name])
+
 @section('content')
 
 
@@ -43,21 +44,20 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Criteria</th>
-                    <th>Status</th>
                 </tr>
                 </thead>
-
                 <tbody>
                 @foreach($subjects as $subject)
                     <tr class="odd gradeX">
-                        <td>{{$subject->subjects}}</td>
-                        <td>{{$subject->criteria}}</td>
-                        <td>{{$subject->status}}</td>
+                        <td>{{$subject->id}}</td>
+                        <td>{{$subject->name}}</td>
+                        <td>{{$subject->criteria->name}}</td>
                     </tr>
 
                 @endforeach
                 </tbody>
             </table>
+
         @endif
 
     </div>

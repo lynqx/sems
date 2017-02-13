@@ -22,6 +22,7 @@
                     <div class="panel-title">
                         <h3>{{$user->firstname}} {{$user->middlename}} {{$user->lastname}}</h3>
                     </div>
+
                     <div class="panel-options">
 
                         <ul class="nav nav-tabs">
@@ -63,13 +64,13 @@
                                                             <div class="input-group-addon">
                                                                 <i class="entypo-user"></i>
                                                             </div>
-                                                            @foreach($sessions as $session)
+                                                            {{--@foreach($sessions as $session)
                                                                 <input type="text" name="joindate"
                                                                        class="form-control" id=""
                                                                        placeholder="Session"
                                                                        value="{{$session->session}}" required
                                                                        readonly>
-                                                            @endforeach
+                                                            @endforeach--}}
                                                         </div>
                                                     </div>
                                                     <label for="field-2" class="col-sm-2 control-label">Joining
@@ -112,7 +113,7 @@
                                                             </div>
                                                             <input type="text" name="class" class="form-control"
                                                                    id="" placeholder="Class"
-                                                                   value="{{$user->class}}" required readonly>
+                                                                   value="{{$user->category->name}}" required readonly>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -187,7 +188,7 @@
                                                             </div>
                                                             <input type="tel" name="mobile" class="form-control"
                                                                    id="" placeholder="Mobile Number"
-                                                                   value="{{$user->mobile}}" required>
+                                                                   value="{{$user->biodata->mobile}}" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -198,8 +199,7 @@
                                                             <p> No Genders available </p>
                                                         </div>
                                                     @else
-                                                        <label for="field-2"
-                                                               class="col-sm-2 control-label">Gender</label>
+                                                        <label for="field-2" class="col-sm-2 control-label">Gender</label>
 
                                                         <div class="col-sm-4">
                                                             <select name="gender" class="select2"
@@ -207,7 +207,7 @@
                                                                     data-placeholder="Select a Gender..." required>
                                                                 <option></option>
                                                                 @foreach($genders as $gender)
-                                                                    <option value="{{$gender->id}}">{{$gender->gender}}</option>
+                                                                    <option value="{{$gender->id}}">{{$gender->name}}</option>
                                                                 @endforeach
                                                             </select>
 
@@ -243,7 +243,7 @@
                                                         <div class="input-group">
                                                             <input type="text" class="form-control datepicker"
                                                                    data-start-view="2" name="dob"
-                                                                   value="{{$user->dob}}">
+                                                                   value="{{$user->biodata->date_of_birth}}">
 
                                                             <div class="input-group-addon">
                                                                 <a href="#"><i class="entypo-calendar"></i></a>
@@ -420,7 +420,7 @@
                                                                     data-placeholder="Select a Gender..." required>
                                                                 <option></option>
                                                                 @foreach($genders as $gender)
-                                                                    <option value="{{$gender->id}}">{{$gender->gender}}</option>
+                                                                    <option value="{{$gender->id}}">{{$gender->name}}</option>
                                                                 @endforeach
                                                             </select>
 
@@ -516,19 +516,19 @@
                                                                         <div class="input-group-addon">
                                                                             <i class="entypo-newspaper"></i>
                                                                         </div>
-                                                                        @foreach($totals as $total)
+                                                                        {{--@foreach($totals as $total)
                                                                             <input type="number" name="amount"
                                                                                    class="form-control"
                                                                                    value="{{$total->totalamount}}"
                                                                                    required
                                                                                    readonly>
-                                                                        @endforeach
+                                                                        @endforeach--}}
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td> Installments</td>
+                                                            <td> Amount to Pay</td>
                                                             <td>
                                                                 <div class="form-group">
                                                                     <div class="input-group">
@@ -537,13 +537,11 @@
                                                                         </div>
                                                                         <input type="number" name="amount"
                                                                                class="form-control"
-                                                                               placeholder="Installmental Payment"
+                                                                               placeholder="Amount to Pay..."
                                                                                required>
                                                                     </div>
                                                                 </div>
-                                                                <small> If installmental field is empty, system assumes
-                                                                    you
-                                                                    are paying the total amount
+                                                                <small> Enter amount to pay in the box above
                                                                 </small>
 
                                                             </td>
@@ -559,6 +557,7 @@
                                                             </td>
                                                         </tr>
                                                     </form>
+
                                                     </tbody>
                                                 </table>
                                             @endif
@@ -581,13 +580,14 @@
                                         </div>
                                         @if (empty($subjects))
                                             <div class="panel-body">
+                                                {{--{{$user->category->courses}}--}}
                                                 <p> This student has not enrolled for any subject yet </p>
                                             </div>
                                         @else
                                             <div class="panel-body">
                                                 <ul>
                                                     @foreach($subjects as $subject)
-                                                        <li>{{$subject->course}} </li>
+                                                        <li><h4>{{$subject->name}} <small class="text-danger">({{$subject->criteria->name}})</small> </h4></li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -626,9 +626,9 @@
                                                         </div>
                                                         <h3>{{$teacher->firstname}} {{$teacher->middlename}} {{$teacher->lastname}}
                                                             <p class="label label-info"
-                                                               style="font-size:10px">{{$teacher->gender}}</p></h3>
+                                                               style="font-size:10px">{{$teacher->biodata->gender->name}}</p></h3>
 
-                                                        <h4><i class="entypo-phone"></i> {{$teacher->mobile}} </h4>
+                                                        <h4><i class="entypo-phone"></i> {{$teacher->biodata->mobile}} </h4>
                                                         <hr>
                                                         <h4><i class="entypo-mail"></i> </span> {{$teacher->email}}
                                                         </h4>
@@ -688,15 +688,15 @@
                         </div>
                         <h3>{{$user->firstname}} {{$user->middlename}} {{$user->lastname}}</h3>
                         <hr>
-                        <p class="btn btn-info">{{$user->gender}}</p>
+                        <p class="btn btn-info">{{$user->biodata->gender->name}}</p>
 
-                        <p class="btn btn-info">{{$user->dob}}</p>
+                        <p class="btn btn-info">{{$user->biodata->date_of_birth}}</p>
                         <hr>
                         <h4><i class="entypo-mobile"></i> {{$user->biodata->mobile}} </h4>
                         <hr>
                         <h4><i class="entypo-mail"></i> </span> {{$user->email}} </h4>
                         <hr>
-                        <h4><i class="entypo-folder"></i> {{$user->category}} </h4>
+                        <h4><i class="entypo-folder"></i> {{$user->category->name}} </h4>
 
                     </center>
                 </div>

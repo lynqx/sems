@@ -60,7 +60,7 @@
                     <tr>
                         <td>{{$category->id}}</td>
                         <td>{{$category->name}}</td>
-                        <td>{{$category->name}}</td>
+                        <td>{{$category->teacher->firstname}} {{$category->teacher->lastname}}</td>
                         {{--<td>{{$category->teacher}}  {{$category->teacher->lastname}}</td>--}}
                         <td>
                             @if($category->status == 1)

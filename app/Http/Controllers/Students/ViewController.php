@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Students;
 
 use App\Http\Controllers\LayoutsMainController;
+use App\Models\Category;
 use App\Models\FeeList;
 use App\Models\Gender;
 use App\Models\Status;
@@ -16,13 +17,16 @@ class ViewController extends LayoutsMainController
 {
     public function home($slug)
     {
-        $user = User::find($slug);
+        $user = User::findOrFail($slug);
 
-        $fees = [];
-//        FeeList::select('*', 'fee_types.name as fee_type')
-//            ->leftjoin('fee_types', 'fee_lists.fee_types', '=', 'fee_types.id')
-//            ->where('fee_lists.categories', $category)
-//            ->get();
+        $category = Category::findOrFail($user->category->id);
+        $subjects = $category->courses()->get();
+        $teachers = $category->teacher()->get();
+
+        $fees = FeeList::select('*', 'fee_types.name as fee_type')
+            ->leftjoin('fee_types', 'fee_lists.fee_types', '=', 'fee_types.id')
+            ->where('fee_lists.categories', '1')
+            ->get();
 
         $totals = [];
 //        DB::table('fee_lists as s1')
@@ -31,19 +35,6 @@ class ViewController extends LayoutsMainController
 //            ->where('s1.categories', $category)
 //            ->get();
 
-        $teachers = [];
-//        User::select('*', 'users.id as uid', 'users.firstname as fname', 'users.lastname as lname',
-//            'user_biodata.mobile as phone')
-//            ->leftjoin('user_biodata', 'users.id', '=', 'user_biodata.user_id')
-//            ->leftjoin('genders', 'user_biodata.gender', '=', 'genders.id')
-//            ->where('users.id', $teacher)
-//            ->get();
-
-        $subjects = [];
-//        StudentSubject::select('*')
-//            ->leftjoin('courses', 'student_subject.subject', '=', 'courses.id')
-//            ->where('student_subject.student', $slug)
-//            ->get();
         $sessions = array();
         $genders = Gender::all();
         $status = Status::all();

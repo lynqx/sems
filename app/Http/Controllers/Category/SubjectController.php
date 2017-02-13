@@ -18,12 +18,16 @@ class SubjectController extends LayoutsMainController
         // error to be fixed
         // supposed to output the subjects available to this class
         // present in category/view subjects
+       /* $user = User::find($slug);
+        $category = Category::find($user->category->id);
+        $subjects = $category->courses()->get();
+       */
 
-        $category = Category::findOrFail($slug);
-       // $category = Category::find($user->category->id);
+        $class = Category::findOrFail($slug);
+        $category = Category::findOrFail($class->id);
         $subjects = $category->courses()->get();
 
-           return View('category.subject', compact('subjects', 'category'));
+           return View('category.subject', compact('subjects', 'category', 'class'));
     }
 
 }
